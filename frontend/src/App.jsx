@@ -20,6 +20,8 @@ import ItineraryBuilder from './pages/ItineraryBuilder';
 import ItineraryView from './pages/ItineraryView';
 import SharedItineraryView from './pages/SharedItineraryView';
 
+import { FaSun, FaMoon } from 'react-icons/fa';
+
 function ScrollToNavbar() {
   const location = useLocation();
 
@@ -51,6 +53,46 @@ function ScrollToNavbar() {
   }, [location]);
 
   return null;
+}
+
+function GlobalThemeToggle() {
+  const [theme, setTheme] = React.useState(() => localStorage.getItem('theme') || 'light');
+
+  React.useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    const nextTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(nextTheme);
+    document.documentElement.setAttribute('data-theme', nextTheme);
+    localStorage.setItem('theme', nextTheme);
+  };
+
+  return (
+    <button
+      onClick={toggleTheme}
+      className="btn rounded-circle shadow-lg d-flex align-items-center justify-content-center p-0"
+      title={theme === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'}
+      style={{
+        position: 'fixed',
+        bottom: '24px',
+        right: '24px',
+        width: '50px',
+        height: '50px',
+        zIndex: 99999,
+        backgroundColor: theme === 'light' ? '#1f352b' : '#f5d7a6',
+        color: theme === 'light' ? '#ffffff' : '#070a08',
+        border: '2px solid rgba(255,255,255,0.2)',
+        fontSize: '20px',
+        cursor: 'pointer',
+        transition: 'all 0.3s ease'
+      }}
+    >
+      {theme === 'light' ? <FaMoon /> : <FaSun />}
+    </button>
+  );
 }
 
 function App() {
@@ -86,6 +128,7 @@ function App() {
           </Routes>
         </main>
         <Footer />
+        <GlobalThemeToggle />
       </div>
     </Router>
   );
