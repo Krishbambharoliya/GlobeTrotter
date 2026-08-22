@@ -18,11 +18,11 @@ class Trip(models.Model):
 
 class TripStop(models.Model):
     trip = models.ForeignKey(Trip, on_delete=models.CASCADE, related_name='stops')
-    city_name = models.CharField(max_length=150)
-    country_name = models.CharField(max_length=150)
-    cost_index = models.CharField(max_length=10, default='$$')
-    popularity = models.CharField(max_length=100, default='High')
-    date = models.DateField()
+    city_name = models.CharField(max_length=150, blank=True, null=True)
+    country_name = models.CharField(max_length=150, blank=True, null=True)
+    cost_index = models.CharField(max_length=10, default='$$', blank=True, null=True)
+    popularity = models.CharField(max_length=100, default='High', blank=True, null=True)
+    date = models.DateField(blank=True, null=True)
     order = models.IntegerField(default=0)
 
     class Meta:
@@ -33,12 +33,12 @@ class TripStop(models.Model):
 
 class TripActivity(models.Model):
     stop = models.ForeignKey(TripStop, on_delete=models.CASCADE, related_name='activities')
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=200, default='Activity')
     description = models.TextField(blank=True, null=True)
-    category = models.CharField(max_length=50, default='Sightseeing') # Sightseeing, Lodging, Transport, Meals, Custom
+    category = models.CharField(max_length=50, default='Sightseeing', blank=True, null=True) # Sightseeing, Lodging, Transport, Meals, Custom
     cost = models.DecimalField(max_digits=12, decimal_places=2, default=0.00)
     duration_hours = models.DecimalField(max_digits=5, decimal_places=2, default=1.00)
-    start_time = models.CharField(max_length=10, default='09:00 AM')
+    start_time = models.CharField(max_length=10, default='09:00 AM', blank=True, null=True)
     order = models.IntegerField(default=0)
 
     class Meta:
