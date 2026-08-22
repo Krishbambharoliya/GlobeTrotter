@@ -41,84 +41,19 @@
 
 [data-theme="dark"] body,
 [data-theme="dark"] html,
-[data-theme="dark"] #root,
-[data-theme="dark"] .min-vh-100,
-[data-theme="dark"] .home-content-wrapper,
-[data-theme="dark"] .search-results-page,
-[data-theme="dark"] .booking-details-page,
-[data-theme="dark"] .payment-page,
-[data-theme="dark"] .dashboard-page,
-[data-theme="dark"] .admin-dashboard-page,
-[data-theme="dark"] .services-page,
-[data-theme="dark"] .contact-page,
-[data-theme="dark"] .about-page,
-[data-theme="dark"] .privacy-page,
-[data-theme="dark"] .terms-page {
+[data-theme="dark"] .min-vh-100 {
   background-color: #0f172a !important;
-  background: #0f172a !important;
   color: #f8fafc !important;
 }
 
 [data-theme="dark"] .bg-light,
 [data-theme="dark"] .bg-white,
-[data-theme="dark"] .bg-light-subtle,
-[data-theme="dark"] .bg-secondary-subtle,
-[data-theme="dark"] .bg-body,
-[data-theme="dark"] .bg-body-tertiary,
 [data-theme="dark"] .card,
-[data-theme="dark"] .filter-card,
-[data-theme="dark"] .result-card,
 [data-theme="dark"] .modal-content,
 [data-theme="dark"] .dropdown-menu,
 [data-theme="dark"] .search-field-box {
   background-color: #1e293b !important;
   color: #f8fafc !important;
-  border-color: #334155 !important;
-}
-
-/* Category Search Tab Cards in Dark Mode */
-[data-theme="dark"] .search-card-tab {
-  background-color: #1e293b !important;
-  background: #1e293b !important;
-  border-color: #334155 !important;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4) !important;
-}
-
-[data-theme="dark"] .search-card-tab span {
-  color: #f8fafc !important;
-}
-
-[data-theme="dark"] .search-card-tab.active {
-  background-color: #1e293b !important;
-  background: #1e293b !important;
-  border-color: #38bdf8 !important;
-  box-shadow: 0 8px 24px rgba(56, 189, 248, 0.25) !important;
-}
-
-[data-theme="dark"] .search-card-tab.active span {
-  color: #38bdf8 !important;
-}
-
-[data-theme="dark"] .search-card-tab:hover {
-  border-color: #38bdf8 !important;
-  background-color: #253346 !important;
-  background: #253346 !important;
-}
-
-[data-theme="dark"] .search-card-tab:hover span {
-  color: #38bdf8 !important;
-}
-
-[data-theme="dark"] .filter-section-header,
-[data-theme="dark"] .filter-title {
-  color: #f8fafc !important;
-}
-
-[data-theme="dark"] .border,
-[data-theme="dark"] .border-top,
-[data-theme="dark"] .border-bottom,
-[data-theme="dark"] .border-start,
-[data-theme="dark"] .border-end {
   border-color: #334155 !important;
 }
 
@@ -716,7 +651,7 @@ nav.navbar-gt .navbar-collapse .navbar-nav .nav-link.active {
 }
 
 .home-content-wrapper {
-  background: linear-gradient(to bottom, #fff0f3 0%, #ffffff 100%) no-repeat;
+  background: linear-gradient(to bottom, #fff0f3 0%, #ffffff 100%) no-repeat !important;
   background-attachment: fixed !important;
   position: relative;
   z-index: 2;
@@ -1795,136 +1730,4 @@ body {
 
 .skiptranslate {
   font-family: inherit !important;
-}
-
-/* ==========================================
-   UNIVERSAL RESPONSIVE STYLES FOR ALL DEVICES
-   Fold Phones, Normal Phones, Tablets, Laptops
-   ========================================== */
-
-/* 1. Global Viewport & Overflow Safety */
-html, body {
-  max-width: 100vw;
-  overflow-x: hidden !important;
-}
-
-/* 2. Fold Phones & Ultra-Narrow Displays (280px - 360px) */
-@media (max-width: 360px) {
-  .search-fields-grid {
-    grid-template-columns: 1fr !important;
-    border-radius: 14px !important;
-  }
-
-  .search-field-box {
-    padding: 12px 14px !important;
-    border-right: none !important;
-    border-bottom: 1px solid var(--border-color) !important;
-  }
-
-  .search-field-box label {
-    font-size: 10px !important;
-    margin-bottom: 4px !important;
-  }
-
-  .search-field-box input,
-  .search-field-box select {
-    font-size: 14px !important;
-  }
-
-  .search-tabs-container {
-    overflow-x: auto !important;
-    flex-wrap: nowrap !important;
-    padding-bottom: 6px !important;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .search-tab-btn {
-    padding: 8px 12px !important;
-    font-size: 12px !important;
-    white-space: nowrap !important;
-  }
-
-  .home-hero-text {
-    padding: 12px !important;
-  }
-
-  .home-hero-text h1,
-  .home-hero-text span {
-    font-size: 22px !important;
-  }
-
-  .home-hero-text p {
-    font-size: 13px !important;
-  }
-
-  /* Compact Floating Action Buttons on Fold Screens */
-  button.position-fixed[title="Make a Trip"] {
-    bottom: 74px !important;
-    right: 12px !important;
-    padding: 6px 14px !important;
-    font-size: 12px !important;
-  }
-}
-
-/* 3. Normal Mobile Phones (361px - 576px) */
-@media (max-width: 576px) {
-  .search-fields-grid {
-    grid-template-columns: 1fr !important;
-  }
-
-  .search-field-box {
-    border-right: none !important;
-    border-bottom: 1px solid var(--border-color) !important;
-    padding: 14px 18px !important;
-  }
-
-  .search-field-box:last-child {
-    border-bottom: none !important;
-  }
-
-  .search-tabs-container {
-    overflow-x: auto !important;
-    flex-wrap: nowrap !important;
-    -webkit-overflow-scrolling: touch;
-    scroll-behavior: smooth;
-    padding-bottom: 4px;
-  }
-
-  .search-tab-btn {
-    white-space: nowrap !important;
-    flex-shrink: 0;
-  }
-
-  .container, .container-fluid {
-    padding-left: 12px !important;
-    padding-right: 12px !important;
-  }
-
-  .card {
-    border-radius: 16px !important;
-  }
-}
-
-/* 4. Tablets & Medium Screens (577px - 991px) */
-@media (min-width: 577px) and (max-width: 991px) {
-  .search-fields-grid {
-    grid-template-columns: repeat(2, 1fr) !important;
-  }
-
-  .search-field-box {
-    padding: 16px 20px !important;
-  }
-}
-
-/* 5. Laptops & Large Displays (992px+) */
-@media (min-width: 992px) {
-  .container {
-    max-width: 1200px;
-  }
-}
-
-@media (min-width: 1400px) {
-  .container {
-    max-width: 1320px;
-  }
 }

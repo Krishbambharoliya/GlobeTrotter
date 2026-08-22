@@ -1809,41 +1809,6 @@ const Home = () => {
 
       </div>
 
-      {/* Right Side Fixed Floating "Make a Trip" Button */}
-      <button
-        onClick={() => {
-          const token = localStorage.getItem('access_token');
-          if (token) {
-            navigate('/trips/new');
-          } else {
-            setIsAuthOpen(true);
-          }
-        }}
-        className="btn rounded-pill shadow-lg d-flex align-items-center gap-2 px-3.5 py-2.5 text-white fw-bold border-0 position-fixed"
-        title="Make a Trip"
-        style={{
-          bottom: '88px',
-          right: '24px',
-          zIndex: 9999,
-          background: 'linear-gradient(135deg, #ff3838 0%, #d63031 100%)',
-          boxShadow: '0 10px 30px rgba(255, 56, 56, 0.55)',
-          fontSize: '14px',
-          cursor: 'pointer',
-          transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)'
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.transform = 'translateY(-3px) scale(1.05)';
-          e.currentTarget.style.boxShadow = '0 14px 35px rgba(255, 56, 56, 0.75)';
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.transform = 'translateY(0) scale(1)';
-          e.currentTarget.style.boxShadow = '0 10px 30px rgba(255, 56, 56, 0.55)';
-        }}
-      >
-        <FaSuitcase size={18} />
-        <span>Make a Trip</span>
-      </button>
-
       <AuthModal
         isOpen={isAuthOpen}
         onClose={() => setIsAuthOpen(false)}
