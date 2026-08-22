@@ -1,3 +1,9 @@
+# Video artifacts
+artifacts_video/
+*.webm
+*.mp4
+record_walkthrough.py
+
 # Logs
 logs
 *.log
