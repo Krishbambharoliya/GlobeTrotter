@@ -1668,3 +1668,33 @@ html {
   box-shadow: 0 8px 25px rgba(45, 74, 62, 0.15);
   transform: translateY(-2px);
 }
+
+/* Google Translate Widget Clean UI Overrides */
+.goog-te-banner-frame.skiptranslate,
+.goog-te-banner-frame {
+  display: none !important;
+}
+
+body {
+  top: 0px !important;
+}
+
+.goog-tooltip,
+.goog-tooltip:hover {
+  display: none !important;
+}
+
+.goog-text-highlight {
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+#goog-gt-tt,
+.goog-te-balloon-frame {
+  display: none !important;
+}
+
+.skiptranslate {
+  font-family: inherit !important;
+}

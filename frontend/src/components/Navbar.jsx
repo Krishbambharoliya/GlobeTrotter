@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { FaPlane, FaHotel, FaBus, FaSuitcase, FaCar, FaBrain, FaSignOutAlt, FaSun, FaMoon } from 'react-icons/fa';
 import AuthModal from './AuthModal';
+import LanguageSelector from './LanguageSelector';
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -175,6 +176,9 @@ const Navbar = () => {
                 <i className='bx bx-user'></i>
               </button>
             )}
+
+            {/* Multi-Language Selector */}
+            <LanguageSelector />
 
             {/* Theme Toggle Button */}
             <button
