@@ -24,9 +24,15 @@ class TrainListView(generics.ListCreateAPIView):
         platform = self.request.query_params.get('platform')
 
         if from_city:
-            queryset = queryset.filter(source_city__icontains=from_city)
+            clean_from = from_city.replace('Railway Station', '').replace('Junction', '').replace('Central', '').replace('Terminus', '').strip()
+            first_word = clean_from.split('(')[0].strip().split(' ')[0]
+            from django.db.models import Q
+            queryset = queryset.filter(Q(source_city__icontains=from_city) | Q(source_city__icontains=clean_from) | Q(source_city__icontains=first_word))
         if to_city:
-            queryset = queryset.filter(destination_city__icontains=to_city)
+            clean_to = to_city.replace('Railway Station', '').replace('Junction', '').replace('Central', '').replace('Terminus', '').strip()
+            first_word_to = clean_to.split('(')[0].strip().split(' ')[0]
+            from django.db.models import Q
+            queryset = queryset.filter(Q(destination_city__icontains=to_city) | Q(destination_city__icontains=clean_to) | Q(destination_city__icontains=first_word_to))
         if departure_date:
             queryset = queryset.filter(departure_time__date=departure_date)
         if platform:

@@ -292,6 +292,50 @@ const Home = () => {
   const [trainTo, setTrainTo] = useState('Goa');
   const [trainDate, setTrainDate] = useState(new Date().toISOString().split('T')[0]);
 
+  // Train station autocomplete states
+  const [trainFromSuggestions, setTrainFromSuggestions] = useState([]);
+  const [trainToSuggestions, setTrainToSuggestions] = useState([]);
+  const [showFromSuggestions, setShowFromSuggestions] = useState(false);
+  const [showToSuggestions, setShowToSuggestions] = useState(false);
+
+  const fetchTrainFromSuggestions = async (val) => {
+    setTrainFrom(val);
+    if (!val || val.trim().length < 1) {
+      setTrainFromSuggestions([]);
+      setShowFromSuggestions(false);
+      return;
+    }
+    try {
+      const res = await api.get(`trains/locations/?q=${encodeURIComponent(val)}&limit=8`);
+      setTrainFromSuggestions(res.data);
+      setShowFromSuggestions(true);
+    } catch (err) {
+      console.error("Failed to fetch stations", err);
+    }
+  };
+
+  const fetchTrainToSuggestions = async (val) => {
+    setTrainTo(val);
+    if (!val || val.trim().length < 1) {
+      setTrainToSuggestions([]);
+      setShowToSuggestions(false);
+      return;
+    }
+    try {
+      const res = await api.get(`trains/locations/?q=${encodeURIComponent(val)}&limit=8`);
+      setTrainToSuggestions(res.data);
+      setShowToSuggestions(true);
+    } catch (err) {
+      console.error("Failed to fetch stations", err);
+    }
+  };
+
+  const swapTrainStations = () => {
+    const temp = trainFrom;
+    setTrainFrom(trainTo);
+    setTrainTo(temp);
+  };
+
   // Bus search states
   const [busFrom, setBusFrom] = useState('New Delhi');
   const [busTo, setBusTo] = useState('Mumbai');
@@ -1482,34 +1526,116 @@ const Home = () => {
                   </div>
                 )}
 
-                {/* Trains Widget */}
+                {/* Trains Widget with Interactive Station Autocomplete */}
                 {activeTab === 'trains' && (
-                  <div className="search-fields-grid">
-                    <div className="search-field-box">
+                  <div className="search-fields-grid position-relative">
+                    {/* FROM Station Field */}
+                    <div className="search-field-box position-relative">
                       <label>From</label>
                       <input
                         type="text"
                         value={trainFrom}
-                        onChange={(e) => setTrainFrom(e.target.value)}
-                        placeholder="e.g. New Delhi"
+                        onChange={(e) => fetchTrainFromSuggestions(e.target.value)}
+                        onFocus={() => trainFrom && fetchTrainFromSuggestions(trainFrom)}
+                        onBlur={() => setTimeout(() => setShowFromSuggestions(false), 200)}
+                        placeholder="e.g. New Delhi Railway Station (NDLS)"
                         className="w-100 fw-bold border-0 bg-transparent"
                         style={{ outline: 'none', fontSize: '16px', color: 'var(--text-dark)' }}
                       />
-                      <span className="small text-muted d-block mt-1">Origin City</span>
+                      <span className="small text-muted d-block mt-1">Origin Station / City</span>
+
+                      {/* Autocomplete Floating List */}
+                      {showFromSuggestions && trainFromSuggestions.length > 0 && (
+                        <div
+                          className="position-absolute bg-white rounded-3 shadow-lg border p-2 w-100 text-start overflow-auto"
+                          style={{ top: '100%', left: 0, zIndex: 1000, maxHeight: '240px' }}
+                        >
+                          <div className="text-muted small fw-bold px-2 py-1 border-bottom" style={{ fontSize: '11px' }}>
+                            MATCHING INDIAN RAILWAY STATIONS
+                          </div>
+                          {trainFromSuggestions.map((st, idx) => (
+                            <button
+                              key={idx}
+                              type="button"
+                              className="dropdown-item p-2 text-wrap d-flex align-items-center gap-2 rounded-2 hover-bg-light"
+                              onClick={() => {
+                                setTrainFrom(st.name);
+                                setShowFromSuggestions(false);
+                              }}
+                              style={{ fontSize: '13px', cursor: 'pointer' }}
+                            >
+                              <span className="fs-6">🚂</span>
+                              <div>
+                                <div className="fw-bold text-dark">{st.name}</div>
+                                <small className="text-muted" style={{ fontSize: '11px' }}>{st.district}, {st.state} ({st.type})</small>
+                              </div>
+                            </button>
+                          ))}
+                        </div>
+                      )}
                     </div>
-                    <div className="search-field-box">
+
+                    {/* Swap Button */}
+                    <div className="d-flex align-items-center justify-content-center">
+                      <button
+                        type="button"
+                        onClick={swapTrainStations}
+                        className="btn btn-light rounded-circle shadow-sm border p-2 text-primary fw-bold"
+                        title="Swap Origin & Destination Stations"
+                        style={{ width: '38px', height: '38px', display: 'flex', alignItems: 'center', justify: 'center' }}
+                      >
+                        ⇄
+                      </button>
+                    </div>
+
+                    {/* TO Station Field */}
+                    <div className="search-field-box position-relative">
                       <label>To</label>
                       <input
                         type="text"
                         value={trainTo}
-                        onChange={(e) => setTrainTo(e.target.value)}
-                        placeholder="e.g. Goa"
+                        onChange={(e) => fetchTrainToSuggestions(e.target.value)}
+                        onFocus={() => trainTo && fetchTrainToSuggestions(trainTo)}
+                        onBlur={() => setTimeout(() => setShowToSuggestions(false), 200)}
+                        placeholder="e.g. Goa Madgaon Junction (MAO)"
                         className="w-100 fw-bold border-0 bg-transparent"
                         style={{ outline: 'none', fontSize: '16px', color: 'var(--text-dark)' }}
                       />
-                      <span className="small text-muted d-block mt-1">Destination City</span>
+                      <span className="small text-muted d-block mt-1">Destination Station / City</span>
+
+                      {/* Autocomplete Floating List */}
+                      {showToSuggestions && trainToSuggestions.length > 0 && (
+                        <div
+                          className="position-absolute bg-white rounded-3 shadow-lg border p-2 w-100 text-start overflow-auto"
+                          style={{ top: '100%', left: 0, zIndex: 1000, maxHeight: '240px' }}
+                        >
+                          <div className="text-muted small fw-bold px-2 py-1 border-bottom" style={{ fontSize: '11px' }}>
+                            MATCHING INDIAN RAILWAY STATIONS
+                          </div>
+                          {trainToSuggestions.map((st, idx) => (
+                            <button
+                              key={idx}
+                              type="button"
+                              className="dropdown-item p-2 text-wrap d-flex align-items-center gap-2 rounded-2 hover-bg-light"
+                              onClick={() => {
+                                setTrainTo(st.name);
+                                setShowToSuggestions(false);
+                              }}
+                              style={{ fontSize: '13px', cursor: 'pointer' }}
+                            >
+                              <span className="fs-6">🚂</span>
+                              <div>
+                                <div className="fw-bold text-dark">{st.name}</div>
+                                <small className="text-muted" style={{ fontSize: '11px' }}>{st.district}, {st.state} ({st.type})</small>
+                              </div>
+                            </button>
+                          ))}
+                        </div>
+                      )}
                     </div>
-                    <div className="search-field-box" style={{ gridColumn: 'span 2' }}>
+
+                    {/* Travel Date */}
+                    <div className="search-field-box">
                       <label>Travel Date</label>
                       <input type="date" value={trainDate} onChange={(e) => setTrainDate(e.target.value)} min={new Date().toISOString().split('T')[0]} />
                     </div>
