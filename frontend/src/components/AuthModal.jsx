@@ -98,6 +98,9 @@ const AuthModal = ({ isOpen, onClose, onSuccess }) => {
         const profileRes = await api.get('users/profile/');
         localStorage.setItem('first_name', profileRes.data.first_name || username);
         localStorage.setItem('is_staff', profileRes.data.is_staff ? 'true' : 'false');
+        if (profileRes.data.avatar_url) {
+          localStorage.setItem('user_avatar', profileRes.data.avatar_url);
+        }
 
         setSuccess('Logged in successfully!');
         setTimeout(() => {
@@ -142,42 +145,44 @@ const AuthModal = ({ isOpen, onClose, onSuccess }) => {
                 <button type="button" className="btn-close" onClick={onClose}></button>
               </div>
 
-              {/* Interactive User Photo Selector matching Excalidraw mockup */}
-              <div className="d-flex flex-column align-items-center justify-content-center my-3">
-                <div
-                  className="position-relative cursor-pointer"
-                  onClick={() => fileInputRef.current?.click()}
-                  title="Click to choose your profile photo"
-                  style={{ width: '84px', height: '84px' }}
-                >
-                  <img
-                    src={profilePhoto}
-                    alt="User Profile Photo"
-                    className="rounded-circle border border-3 border-primary shadow-sm object-fit-cover w-100 h-100"
-                  />
+              {/* Interactive User Photo Selector for Sign Up / Register */}
+              {authView === 'register' && (
+                <div className="d-flex flex-column align-items-center justify-content-center my-3">
                   <div
-                    className="position-absolute bottom-0 end-0 bg-primary text-white rounded-circle d-flex align-items-center justify-content-center border border-2 border-white shadow"
-                    style={{ width: '26px', height: '26px', fontSize: '12px' }}
+                    className="position-relative cursor-pointer"
+                    onClick={() => fileInputRef.current?.click()}
+                    title="Click to choose your profile photo"
+                    style={{ width: '84px', height: '84px' }}
                   >
-                    <FaCamera />
+                    <img
+                      src={profilePhoto}
+                      alt="User Profile Photo"
+                      className="rounded-circle border border-3 border-primary shadow-sm object-fit-cover w-100 h-100"
+                    />
+                    <div
+                      className="position-absolute bottom-0 end-0 bg-primary text-white rounded-circle d-flex align-items-center justify-content-center border border-2 border-white shadow"
+                      style={{ width: '26px', height: '26px', fontSize: '12px' }}
+                    >
+                      <FaCamera />
+                    </div>
                   </div>
+                  <input
+                    type="file"
+                    ref={fileInputRef}
+                    onChange={handlePhotoChange}
+                    accept="image/*"
+                    className="d-none"
+                  />
+                  <button
+                    type="button"
+                    className="btn btn-link p-0 text-decoration-none mt-1 fw-semibold text-primary"
+                    onClick={() => fileInputRef.current?.click()}
+                    style={{ fontSize: '12px' }}
+                  >
+                    Choose Photo
+                  </button>
                 </div>
-                <input
-                  type="file"
-                  ref={fileInputRef}
-                  onChange={handlePhotoChange}
-                  accept="image/*"
-                  className="d-none"
-                />
-                <button
-                  type="button"
-                  className="btn btn-link p-0 text-decoration-none mt-1 fw-semibold text-primary"
-                  onClick={() => fileInputRef.current?.click()}
-                  style={{ fontSize: '12px' }}
-                >
-                  Choose Photo
-                </button>
-              </div>
+              )}
 
               {error && <div className="alert alert-danger py-2 small">{error}</div>}
               {success && <div className="alert alert-success py-2 small">{success}</div>}

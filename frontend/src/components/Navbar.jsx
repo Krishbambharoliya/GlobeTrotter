@@ -111,7 +111,11 @@ const Navbar = () => {
                     e.currentTarget.style.transform = 'translateY(0)';
                   }}
                 >
-                  <i className='bx bx-user' style={{ fontSize: '18px' }}></i>
+                  {localStorage.getItem('user_avatar') ? (
+                    <img src={localStorage.getItem('user_avatar')} alt="Avatar" className="rounded-circle object-fit-cover border border-1 border-primary" style={{ width: '26px', height: '26px' }} />
+                  ) : (
+                    <i className='bx bx-user' style={{ fontSize: '18px' }}></i>
+                  )}
                   <span>Hi, {firstName}</span>
                   {isAdmin && (
                     <span style={{

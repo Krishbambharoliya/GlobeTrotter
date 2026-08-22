@@ -320,9 +320,40 @@ const ItineraryView = () => {
               </div>
             )}
 
-            {/* Category Cost List (Progress representation) */}
+            {/* Category Cost List & Visual Graph Chart */}
             <div className="card border-0 shadow-sm rounded-4 bg-white p-4">
-              <h6 className="fw-bold text-dark-blue mb-3">Expenses by Category</h6>
+              <h6 className="fw-bold text-dark-blue mb-3">Expenses Breakdown Graph Chart</h6>
+              
+              {/* Visual SVG Bar Chart */}
+              {totalCost > 0 && (
+                <div className="p-3 bg-light rounded-3 mb-4 border">
+                  <div className="d-flex align-items-end justify-content-around gap-2" style={{ height: '140px' }}>
+                    {Object.entries(categories).map(([cat, val], idx) => {
+                      if (val === 0) return null;
+                      const maxCatVal = Math.max(...Object.values(categories)) || 1;
+                      const barH = Math.max(12, Math.round((val / maxCatVal) * 100));
+                      const colors = ['#0084ff', '#0284c7', '#38bdf8', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6'];
+                      const color = colors[idx % colors.length];
+
+                      return (
+                        <div key={cat} className="d-flex flex-column align-items-center flex-grow-1 h-100 justify-content-end" title={`${cat}: $${val.toFixed(2)}`}>
+                          <span className="small text-muted mb-1 fw-bold" style={{ fontSize: '10px' }}>${val.toFixed(0)}</span>
+                          <div 
+                            className="w-100 rounded-top"
+                            style={{ 
+                              height: `${barH}px`, 
+                              backgroundColor: color,
+                              transition: 'height 0.4s ease-in-out'
+                            }}
+                          ></div>
+                          <span className="small text-dark fw-semibold mt-1 text-truncate" style={{ fontSize: '10px', maxWidth: '50px' }}>{cat}</span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+
               <div className="d-flex flex-column gap-3">
                 {Object.entries(categories).map(([cat, val]) => {
                   if (val === 0) return null;
@@ -333,9 +364,9 @@ const ItineraryView = () => {
                         <span className="small fw-semibold text-dark-blue">{cat}</span>
                         <span className="small text-muted">${val.toFixed(2)} ({pct}%)</span>
                       </div>
-                      <div className="progress" style={{ height: '5px' }}>
+                      <div className="progress" style={{ height: '6px' }}>
                         <div 
-                          className="progress-bar bg-primary" 
+                          className="progress-bar bg-primary rounded-pill" 
                           role="progressbar" 
                           style={{ width: `${pct}%` }}
                         ></div>
