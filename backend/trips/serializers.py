@@ -40,14 +40,10 @@ class TripSerializer(serializers.ModelSerializer):
         
         for stop_order, stop_data in enumerate(stops_data):
             activities_data = stop_data.pop('activities', [])
-            order = stop_data.pop('order', stop_order)
-            stop_data.pop('id', None)
-            stop = TripStop.objects.create(trip=trip, order=order, **stop_data)
+            stop = TripStop.objects.create(trip=trip, order=stop_order, **stop_data)
             
             for act_order, act_data in enumerate(activities_data):
-                act_order_val = act_data.pop('order', act_order)
-                act_data.pop('id', None)
-                TripActivity.objects.create(stop=stop, order=act_order_val, **act_data)
+                TripActivity.objects.create(stop=stop, order=act_order, **act_data)
                 
         return trip
 
@@ -68,13 +64,12 @@ class TripSerializer(serializers.ModelSerializer):
             instance.stops.all().delete()
             for stop_order, stop_data in enumerate(stops_data):
                 activities_data = stop_data.pop('activities', [])
-                order = stop_data.pop('order', stop_order)
+                # Remove id from stop_data if present to avoid integrity error on auto-increment field
                 stop_data.pop('id', None)
-                stop = TripStop.objects.create(trip=instance, order=order, **stop_data)
+                stop = TripStop.objects.create(trip=instance, order=stop_order, **stop_data)
                 
                 for act_order, act_data in enumerate(activities_data):
-                    act_order_val = act_data.pop('order', act_order)
                     act_data.pop('id', None)
-                    TripActivity.objects.create(stop=stop, order=act_order_val, **act_data)
+                    TripActivity.objects.create(stop=stop, order=act_order, **act_data)
                     
         return instance

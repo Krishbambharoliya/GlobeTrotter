@@ -292,50 +292,6 @@ const Home = () => {
   const [trainTo, setTrainTo] = useState('Goa');
   const [trainDate, setTrainDate] = useState(new Date().toISOString().split('T')[0]);
 
-  // Train station autocomplete states
-  const [trainFromSuggestions, setTrainFromSuggestions] = useState([]);
-  const [trainToSuggestions, setTrainToSuggestions] = useState([]);
-  const [showFromSuggestions, setShowFromSuggestions] = useState(false);
-  const [showToSuggestions, setShowToSuggestions] = useState(false);
-
-  const fetchTrainFromSuggestions = async (val) => {
-    setTrainFrom(val);
-    if (!val || val.trim().length < 1) {
-      setTrainFromSuggestions([]);
-      setShowFromSuggestions(false);
-      return;
-    }
-    try {
-      const res = await api.get(`trains/locations/?q=${encodeURIComponent(val)}&limit=8`);
-      setTrainFromSuggestions(res.data);
-      setShowFromSuggestions(true);
-    } catch (err) {
-      console.error("Failed to fetch stations", err);
-    }
-  };
-
-  const fetchTrainToSuggestions = async (val) => {
-    setTrainTo(val);
-    if (!val || val.trim().length < 1) {
-      setTrainToSuggestions([]);
-      setShowToSuggestions(false);
-      return;
-    }
-    try {
-      const res = await api.get(`trains/locations/?q=${encodeURIComponent(val)}&limit=8`);
-      setTrainToSuggestions(res.data);
-      setShowToSuggestions(true);
-    } catch (err) {
-      console.error("Failed to fetch stations", err);
-    }
-  };
-
-  const swapTrainStations = () => {
-    const temp = trainFrom;
-    setTrainFrom(trainTo);
-    setTrainTo(temp);
-  };
-
   // Bus search states
   const [busFrom, setBusFrom] = useState('New Delhi');
   const [busTo, setBusTo] = useState('Mumbai');
@@ -577,10 +533,11 @@ const Home = () => {
         </video>
         <div className="home-hero-text d-flex flex-column align-items-center justify-content-center text-center gap-3 px-3" style={{ textShadow: '0 2px 10px rgba(0, 0, 0, 0.8)' }}>
           <div className="d-flex align-items-center justify-content-center flex-wrap gap-2">
-            <span style={{ fontFamily: "'Limelight', cursive" }}>Your therapist was right, you need to explore with</span>
+            <span style={{ fontFamily: "'Limelight', cursive" }}>Your therapist was right, you need to</span>
             <div className="d-inline-flex align-items-center" style={{ verticalAlign: 'middle', textShadow: 'none' }}>
-              <span style={{ fontSize: '1.0em', letterSpacing: '-1.5px', fontWeight: '800', color: '#ffffff', fontFamily: "'Limelight', cursive", marginRight: '6px' }}>Globe</span>
-              <span style={{ fontSize: '1.0em', letterSpacing: '-1.5px', fontWeight: '800', color: '#ff3838', fontFamily: "'Limelight', cursive" }}>Trotter</span>
+              <span style={{ fontSize: '1.0em', letterSpacing: '-1.5px', fontWeight: '800', color: '#ffffff', fontFamily: "'Limelight', cursive" }}>plan</span>
+              <span style={{ fontSize: '0.65em', fontWeight: '800', backgroundColor: '#ff3838', color: '#ffffff', padding: '2px 8px', borderRadius: '6px', fontFamily: "'Limelight', cursive", margin: '0 6px', textTransform: 'lowercase', display: 'inline-block', lineHeight: '1.2' }}>your</span>
+              <span style={{ fontSize: '1.0em', letterSpacing: '-1.5px', fontWeight: '800', color: '#ffffff', fontFamily: "'Limelight', cursive" }}>trip</span>
             </div>
           </div>
           <p style={{ fontSize: '20px', fontWeight: '500', color: 'rgba(255, 255, 255, 0.75)', fontFamily: "'Poppins', sans-serif", letterSpacing: '0.5px', margin: '0' }}>
@@ -609,7 +566,7 @@ const Home = () => {
             }}
             style={{ textDecoration: 'none' }}
           >
-            <span style={{ fontSize: '28px', letterSpacing: '-1.5px', fontWeight: '800', color: 'var(--primary-sage)', fontFamily: "'Poppins', sans-serif", marginRight: '6px' }}>Globe</span>
+            <span style={{ fontSize: '28px', letterSpacing: '-1.5px', fontWeight: '800', color: 'var(--primary-sage)', fontFamily: "'Poppins', sans-serif" }}>Globe</span>
             <span style={{ fontSize: '28px', letterSpacing: '-1.5px', fontWeight: '800', color: '#ff3838', fontFamily: "'Poppins', sans-serif" }}>Trotter</span>
           </Link>
 
@@ -637,11 +594,7 @@ const Home = () => {
                     e.currentTarget.style.transform = 'translateY(0)';
                   }}
                 >
-                  {localStorage.getItem('user_avatar') ? (
-                    <img src={localStorage.getItem('user_avatar')} alt="Avatar" className="rounded-circle object-fit-cover border border-1 border-primary" style={{ width: '26px', height: '26px' }} />
-                  ) : (
-                    <i className='bx bx-user' style={{ fontSize: '18px' }}></i>
-                  )}
+                  <i className='bx bx-user' style={{ fontSize: '18px' }}></i>
                   <span>Hi, {firstName}</span>
                   {isAdmin && (
                     <span style={{
@@ -724,22 +677,6 @@ const Home = () => {
                 </button>
               </li>
               <li className="nav-item">
-                <Link
-                  className="nav-link px-3 py-1.5 fw-semibold border-0 text-decoration-none text-muted"
-                  to="/trips"
-                >
-                  Plan Trips
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link
-                  className="nav-link px-3 py-1.5 fw-semibold border-0 text-decoration-none text-muted"
-                  to="/community"
-                >
-                  Community
-                </Link>
-              </li>
-              <li className="nav-item">
                 <button
                   className="nav-link px-3 py-1.5 fw-semibold border-0 bg-transparent text-muted"
                   onClick={() => {
@@ -781,8 +718,9 @@ const Home = () => {
               <h1 className="travel-banner-title mb-2 text-white d-flex align-items-center justify-content-center flex-wrap gap-2">
                 <span style={{ fontFamily: "'Poppins', sans-serif" }}>Explore India with</span>
                 <div className="d-inline-flex align-items-center" style={{ verticalAlign: 'middle', textShadow: 'none' }}>
-                  <span style={{ fontSize: '1.0em', letterSpacing: '-1.5px', fontWeight: '800', color: '#ffffff', fontFamily: "'Poppins', sans-serif", marginRight: '6px' }}>Globe</span>
-                  <span style={{ fontSize: '1.0em', letterSpacing: '-1.5px', fontWeight: '800', color: '#ff3838', fontFamily: "'Poppins', sans-serif" }}>Trotter</span>
+                  <span style={{ fontSize: '1.0em', letterSpacing: '-1.5px', fontWeight: '800', color: '#ffffff', fontFamily: "'Poppins', sans-serif" }}>plan</span>
+                  <span style={{ fontSize: '0.65em', fontWeight: '800', backgroundColor: '#ff3838', color: '#ffffff', padding: '2px 8px', borderRadius: '6px', fontFamily: "'Poppins', sans-serif", margin: '0 6px', textTransform: 'lowercase', display: 'inline-block', lineHeight: '1.2' }}>your</span>
+                  <span style={{ fontSize: '1.0em', letterSpacing: '-1.5px', fontWeight: '800', color: '#ffffff', fontFamily: "'Poppins', sans-serif" }}>trip</span>
                 </div>
               </h1>
               <p className="travel-banner-subtitle text-white-50 mb-0">Find the best deals on flights, hotels, and more for your next adventure.</p>
@@ -1542,116 +1480,34 @@ const Home = () => {
                   </div>
                 )}
 
-                {/* Trains Widget with Interactive Station Autocomplete */}
+                {/* Trains Widget */}
                 {activeTab === 'trains' && (
-                  <div className="search-fields-grid position-relative">
-                    {/* FROM Station Field */}
-                    <div className="search-field-box position-relative">
+                  <div className="search-fields-grid">
+                    <div className="search-field-box">
                       <label>From</label>
                       <input
                         type="text"
                         value={trainFrom}
-                        onChange={(e) => fetchTrainFromSuggestions(e.target.value)}
-                        onFocus={() => trainFrom && fetchTrainFromSuggestions(trainFrom)}
-                        onBlur={() => setTimeout(() => setShowFromSuggestions(false), 200)}
-                        placeholder="e.g. New Delhi Railway Station (NDLS)"
+                        onChange={(e) => setTrainFrom(e.target.value)}
+                        placeholder="e.g. New Delhi"
                         className="w-100 fw-bold border-0 bg-transparent"
                         style={{ outline: 'none', fontSize: '16px', color: 'var(--text-dark)' }}
                       />
-                      <span className="small text-muted d-block mt-1">Origin Station / City</span>
-
-                      {/* Autocomplete Floating List */}
-                      {showFromSuggestions && trainFromSuggestions.length > 0 && (
-                        <div
-                          className="position-absolute bg-white rounded-3 shadow-lg border p-2 w-100 text-start overflow-auto"
-                          style={{ top: '100%', left: 0, zIndex: 1000, maxHeight: '240px' }}
-                        >
-                          <div className="text-muted small fw-bold px-2 py-1 border-bottom" style={{ fontSize: '11px' }}>
-                            MATCHING INDIAN RAILWAY STATIONS
-                          </div>
-                          {trainFromSuggestions.map((st, idx) => (
-                            <button
-                              key={idx}
-                              type="button"
-                              className="dropdown-item p-2 text-wrap d-flex align-items-center gap-2 rounded-2 hover-bg-light"
-                              onClick={() => {
-                                setTrainFrom(st.name);
-                                setShowFromSuggestions(false);
-                              }}
-                              style={{ fontSize: '13px', cursor: 'pointer' }}
-                            >
-                              <span className="fs-6">🚂</span>
-                              <div>
-                                <div className="fw-bold text-dark">{st.name}</div>
-                                <small className="text-muted" style={{ fontSize: '11px' }}>{st.district}, {st.state} ({st.type})</small>
-                              </div>
-                            </button>
-                          ))}
-                        </div>
-                      )}
+                      <span className="small text-muted d-block mt-1">Origin City</span>
                     </div>
-
-                    {/* Swap Button */}
-                    <div className="d-flex align-items-center justify-content-center">
-                      <button
-                        type="button"
-                        onClick={swapTrainStations}
-                        className="btn btn-light rounded-circle shadow-sm border p-2 text-primary fw-bold"
-                        title="Swap Origin & Destination Stations"
-                        style={{ width: '38px', height: '38px', display: 'flex', alignItems: 'center', justify: 'center' }}
-                      >
-                        ⇄
-                      </button>
-                    </div>
-
-                    {/* TO Station Field */}
-                    <div className="search-field-box position-relative">
+                    <div className="search-field-box">
                       <label>To</label>
                       <input
                         type="text"
                         value={trainTo}
-                        onChange={(e) => fetchTrainToSuggestions(e.target.value)}
-                        onFocus={() => trainTo && fetchTrainToSuggestions(trainTo)}
-                        onBlur={() => setTimeout(() => setShowToSuggestions(false), 200)}
-                        placeholder="e.g. Goa Madgaon Junction (MAO)"
+                        onChange={(e) => setTrainTo(e.target.value)}
+                        placeholder="e.g. Goa"
                         className="w-100 fw-bold border-0 bg-transparent"
                         style={{ outline: 'none', fontSize: '16px', color: 'var(--text-dark)' }}
                       />
-                      <span className="small text-muted d-block mt-1">Destination Station / City</span>
-
-                      {/* Autocomplete Floating List */}
-                      {showToSuggestions && trainToSuggestions.length > 0 && (
-                        <div
-                          className="position-absolute bg-white rounded-3 shadow-lg border p-2 w-100 text-start overflow-auto"
-                          style={{ top: '100%', left: 0, zIndex: 1000, maxHeight: '240px' }}
-                        >
-                          <div className="text-muted small fw-bold px-2 py-1 border-bottom" style={{ fontSize: '11px' }}>
-                            MATCHING INDIAN RAILWAY STATIONS
-                          </div>
-                          {trainToSuggestions.map((st, idx) => (
-                            <button
-                              key={idx}
-                              type="button"
-                              className="dropdown-item p-2 text-wrap d-flex align-items-center gap-2 rounded-2 hover-bg-light"
-                              onClick={() => {
-                                setTrainTo(st.name);
-                                setShowToSuggestions(false);
-                              }}
-                              style={{ fontSize: '13px', cursor: 'pointer' }}
-                            >
-                              <span className="fs-6">🚂</span>
-                              <div>
-                                <div className="fw-bold text-dark">{st.name}</div>
-                                <small className="text-muted" style={{ fontSize: '11px' }}>{st.district}, {st.state} ({st.type})</small>
-                              </div>
-                            </button>
-                          ))}
-                        </div>
-                      )}
+                      <span className="small text-muted d-block mt-1">Destination City</span>
                     </div>
-
-                    {/* Travel Date */}
-                    <div className="search-field-box">
+                    <div className="search-field-box" style={{ gridColumn: 'span 2' }}>
                       <label>Travel Date</label>
                       <input type="date" value={trainDate} onChange={(e) => setTrainDate(e.target.value)} min={new Date().toISOString().split('T')[0]} />
                     </div>
@@ -1772,10 +1628,10 @@ const Home = () => {
           </div>
         </div>
 
-        {/* Why Choose Globe Trotter Section */}
+        {/* Why Choose GlobeTrotter Section */}
         <div className="card mx-auto mt-5 border-0 rounded-4 shadow-sm p-4 p-md-5" style={{ maxWidth: '1100px', background: 'var(--warm-cream)' }}>
           <div className="text-center mb-5">
-            <h3 className="fw-bold mb-2 text-dark-blue" style={{ fontSize: '2.2rem' }}>Why Choose Globe Trotter</h3>
+            <h3 className="fw-bold mb-2 text-dark-blue" style={{ fontSize: '2.2rem' }}>Why Choose GlobeTrotter</h3>
             <p className="text-muted mx-auto" style={{ maxWidth: '700px' }}>
               Setting the gold standard for luxury travel with personalized service and unmatched expertise.
             </p>
@@ -1897,24 +1753,6 @@ const Home = () => {
         </div>
 
       </div>
-
-      {/* Screen 3 Mockup Floating Action Button: + Plan a trip */}
-      <Link
-        to="/trips/new"
-        className="btn rounded-pill shadow-lg fw-bold d-flex align-items-center gap-2 px-4 py-3 text-white"
-        style={{
-          position: 'fixed',
-          bottom: '30px',
-          right: '30px',
-          zIndex: 9999,
-          backgroundColor: '#ff3838',
-          fontSize: '16px',
-          border: 'none',
-          boxShadow: '0 8px 24px rgba(255, 56, 56, 0.4)'
-        }}
-      >
-        <span>+ Plan a trip</span>
-      </Link>
 
       <AuthModal
         isOpen={isAuthOpen}

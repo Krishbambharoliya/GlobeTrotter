@@ -37,7 +37,7 @@ const Services = () => {
     {
       icon: <FaCrown size={26} style={{ color: 'var(--primary-sage)' }} />,
       title: "VIP Loyalty Member Club",
-      desc: "Join our exclusive Globe Trotter Member Club (Black VIP level) to gain instant wallet credits, double reward points, and zero booking cancellation fees."
+      desc: "Join our exclusive GlobeTrotter Member Club (Black VIP level) to gain instant wallet credits, double reward points, and zero booking cancellation fees."
     },
     {
       icon: <FaCompass size={26} style={{ color: 'var(--primary-sage)' }} />,

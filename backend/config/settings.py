@@ -176,9 +176,3 @@ AUTHENTICATION_BACKENDS = [
     'users.backends.EmailOrUsernameModelBackend',
 ]
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-# Train API Key & Location Dataset Configuration
-TRAIN_API_KEY = "rg_9033efca615d47598abb369bb69f12b0"
-LOCATION_EXCEL_PATH = r"d:\GlobeTrotter\Location\All_Sub_Districtof_India_2026-08-22_09-30-58.xlsx"
-

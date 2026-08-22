@@ -65,7 +65,7 @@ const Payment = () => {
     if (paymentMethod === 'Wallet') {
       const rawBal = profile?.profile?.wallet_balance ?? profile?.wallet_balance ?? 0;
       if (parseFloat(rawBal) < parseFloat(booking.total_price)) {
-        setPaymentError('Insufficient Globe Trotter Wallet balance. Please use another method.');
+        setPaymentError('Insufficient GlobeTrotter Wallet balance. Please use another method.');
         return;
       }
     }

@@ -35,8 +35,9 @@ const Footer = () => {
           {/* About Column */}
           <div className="footlinks" style={{ flex: '1', minWidth: '250px', margin: '15px 10px' }}>
             <Link className="d-flex align-items-center mb-3 text-decoration-none" to="/" onClick={(e) => handleLinkClick(e, '/', 'navbar')}>
-              <span style={{ fontSize: '26px', letterSpacing: '-1.5px', fontWeight: '800', color: '#ffffff', fontFamily: "'Poppins', sans-serif", marginRight: '6px' }}>Globe</span>
-              <span style={{ fontSize: '26px', letterSpacing: '-1.5px', fontWeight: '800', color: '#ff3838', fontFamily: "'Poppins', sans-serif" }}>Trotter</span>
+              <span style={{ fontSize: '26px', letterSpacing: '-1.5px', fontWeight: '800', color: '#ffffff', fontFamily: "'Poppins', sans-serif" }}>plan</span>
+              <span style={{ fontSize: '16px', fontWeight: '800', backgroundColor: '#ff3838', color: '#ffffff', padding: '2px 7px', borderRadius: '5px', fontFamily: "'Poppins', sans-serif", margin: '0 5px', textTransform: 'lowercase', display: 'inline-block', lineHeight: '1.2' }}>your</span>
+              <span style={{ fontSize: '26px', letterSpacing: '-1.5px', fontWeight: '800', color: '#ffffff', fontFamily: "'Poppins', sans-serif" }}>trip</span>
             </Link>
             <p style={{ color: '#dddddd', fontSize: '15px', lineHeight: '1.6', marginTop: '15px', fontWeight: '500', marginBottom: '8px' }}>
               Making travel planning simple, smart & stress-free
@@ -75,7 +76,7 @@ const Footer = () => {
             <ul style={{ listStyle: 'none', padding: 0, marginTop: '15px', color: '#dddddd', fontSize: '14px' }}>
               <li style={{ marginBottom: '15px', display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
                 <i className='bx bx-map-pin' style={{ fontSize: '18px', color: 'white', marginTop: '3px' }}></i>
-                <span>Globe Trotter Travel Systems Pvt. Ltd.<br />Cyber City, Gurgaon, India</span>
+                <span>GlobeTrotter Travel Systems Pvt. Ltd.<br />Cyber City, Gurgaon, India</span>
               </li>
               <li style={{ marginBottom: '15px', display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <i className='bx bx-phone-call' style={{ fontSize: '18px', color: 'white' }}></i>
@@ -92,7 +93,7 @@ const Footer = () => {
 
         <div className="end">
           <p>
-            © {new Date().getFullYear()} Globe Trotter. All Rights Reserved. |{' '}
+            © {new Date().getFullYear()} GlobeTrotter. All Rights Reserved. |{' '}
             <Link to="/terms" style={{ color: '#dddddd', textDecoration: 'none', marginLeft: '5px' }}>Terms & Conditions</Link> |{' '}
             <Link to="/privacy" style={{ color: '#dddddd', textDecoration: 'none', marginLeft: '5px' }}>Privacy Policy</Link>
           </p>

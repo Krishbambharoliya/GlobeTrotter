@@ -1884,7 +1884,7 @@ const AdminDashboard = () => {
                                   <h4 className="fw-bold text-success mb-0">₹{Math.floor(parseFloat(viewItem.profile?.wallet_balance || 0)).toLocaleString('en-IN')}</h4>
                                 </div>
                                 <div className="col-6">
-                                  <span className="text-muted small d-block">Globe Trotter Loyalty Coins</span>
+                                  <span className="text-muted small d-block">GlobeTrotter Loyalty Coins</span>
                                   <h4 className="fw-bold text-warning mb-0">🪙 {viewItem.profile?.loyalty_points || 0} Coins</h4>
                                 </div>
                               </div>

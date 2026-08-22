@@ -19,7 +19,6 @@ import CreateTrip from './pages/CreateTrip';
 import ItineraryBuilder from './pages/ItineraryBuilder';
 import ItineraryView from './pages/ItineraryView';
 import SharedItineraryView from './pages/SharedItineraryView';
-import Community from './pages/Community';
 
 function ScrollToNavbar() {
   const location = useLocation();
@@ -83,7 +82,6 @@ function App() {
             <Route path="/trips/:id" element={<ItineraryView />} />
             <Route path="/trips/:id/edit" element={<ItineraryBuilder />} />
             <Route path="/trips/shared/:id" element={<SharedItineraryView />} />
-            <Route path="/community" element={<Community />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>

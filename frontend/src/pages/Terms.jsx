@@ -13,7 +13,7 @@ const Terms = () => {
           <section className="mb-4">
             <h5 className="fw-bold text-dark-blue mb-2" style={{ fontSize: '18px' }}>1. Agreement to Terms</h5>
             <p>
-              Welcome to Globe Trotter. By accessing or using our website, mobile application, or services, you agree to comply with and be bound by these Terms & Conditions. If you do not agree, please refrain from using our services.
+              Welcome to GlobeTrotter. By accessing or using our website, mobile application, or services, you agree to comply with and be bound by these Terms & Conditions. If you do not agree, please refrain from using our services.
             </p>
           </section>
 
@@ -27,21 +27,21 @@ const Terms = () => {
           <section className="mb-4">
             <h5 className="fw-bold text-dark-blue mb-2" style={{ fontSize: '18px' }}>3. Booking & Payment Policies</h5>
             <p>
-              All bookings made through Globe Trotter are subject to availability. Prices quoted are subject to change before confirmation. Payments must be settled in full to secure tickets or hotel reservations. Any additional charges imposed by vendors/operators are the sole responsibility of the customer.
+              All bookings made through GlobeTrotter are subject to availability. Prices quoted are subject to change before confirmation. Payments must be settled in full to secure tickets or hotel reservations. Any additional charges imposed by vendors/operators are the sole responsibility of the customer.
             </p>
           </section>
 
           <section className="mb-4">
             <h5 className="fw-bold text-dark-blue mb-2" style={{ fontSize: '18px' }}>4. Cancellation & Refund Policy</h5>
             <p>
-              Cancellations and modifications are governed by the respective rules of airline operators, hotels, rail authorities, and vehicle rental companies. Globe Trotter reserves the right to charge standard processing fees for facilitating any cancellations or refunds.
+              Cancellations and modifications are governed by the respective rules of airline operators, hotels, rail authorities, and vehicle rental companies. GlobeTrotter reserves the right to charge standard processing fees for facilitating any cancellations or refunds.
             </p>
           </section>
 
           <section className="mb-4">
             <h5 className="fw-bold text-dark-blue mb-2" style={{ fontSize: '18px' }}>5. Limitation of Liability</h5>
             <p>
-              Globe Trotter acts as an intermediary agent facilitating travel bookings. We do not control or operate third-party hotels, flights, trains, or car fleets, and are not liable for service delays, quality issues, injuries, damages, or losses resulting from third-party vendor default.
+              GlobeTrotter acts as an intermediary agent facilitating travel bookings. We do not control or operate third-party hotels, flights, trains, or car fleets, and are not liable for service delays, quality issues, injuries, damages, or losses resulting from third-party vendor default.
             </p>
           </section>
 

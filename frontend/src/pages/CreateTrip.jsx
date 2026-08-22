@@ -157,42 +157,10 @@ const CreateTrip = () => {
             {loading ? (
               <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
             ) : (
-              'Save & Build Itinerary'
+              'Start Planning Stops'
             )}
           </button>
         </form>
-      </div>
-
-      {/* Screen 4 Mockup: Suggestion for Places to Visit / Activities to perform */}
-      <div className="mt-5">
-        <h5 className="fw-bold text-dark-blue mb-3">Suggestion for Places to Visit / Activities to perform</h5>
-        <div className="row g-3">
-          {[
-            { city: 'Paris, France', desc: 'Eiffel Tower, Louvre Museum, Seine River Cruise', tag: 'Top Rated' },
-            { city: 'Tokyo, Japan', desc: 'Shibuya Crossing, Mount Fuji, Akihabara Tech', tag: 'Popular' },
-            { city: 'Rome, Italy', desc: 'Colosseum, Vatican City, Trevi Fountain', tag: 'Culture' },
-            { city: 'Goa, India', desc: 'Scuba Diving, Beaches, Sunset Cruise', tag: 'Adventure' },
-            { city: 'London, UK', desc: 'London Eye, Big Ben, Westminster Abbey', tag: 'Sightseeing' },
-            { city: 'Bali, Indonesia', desc: 'Ubud Monkey Forest, Volcano Sunrise Trek', tag: 'Relaxation' }
-          ].map((item, idx) => (
-            <div className="col-md-6" key={idx}>
-              <div className="card border-0 shadow-sm rounded-4 p-3 h-100 bg-white hover-shadow" style={{ transition: 'all 0.2s' }}>
-                <div className="d-flex justify-content-between align-items-start mb-2">
-                  <h6 className="fw-bold text-dark-blue mb-0">{item.city}</h6>
-                  <span className="badge bg-light text-primary rounded-pill small">{item.tag}</span>
-                </div>
-                <p className="text-muted small mb-2">{item.desc}</p>
-                <button
-                  type="button"
-                  className="btn btn-sm btn-outline-primary rounded-pill w-100 mt-auto fw-semibold"
-                  onClick={() => setName(`Trip to ${item.city}`)}
-                >
-                  Select This Place
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
       </div>
     </div>
   );

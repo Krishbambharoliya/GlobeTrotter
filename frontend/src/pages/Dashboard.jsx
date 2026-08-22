@@ -420,13 +420,13 @@ const Dashboard = () => {
           <div className="modal-dialog modal-lg modal-dialog-centered">
             <div className="modal-content border-0 rounded-4 shadow-lg overflow-hidden animate-fade-in">
               <div className="modal-header border-0 bg-dark text-white p-4">
-                <h5 className="modal-title fw-bold">✈️ Globe Trotter Travel E-Ticket</h5>
+                <h5 className="modal-title fw-bold">✈️ GlobeTrotter Travel E-Ticket</h5>
                 <button type="button" className="btn-close btn-close-white" onClick={() => setSelectedTicket(null)}></button>
               </div>
               <div className="modal-body p-4 p-md-5 bg-white text-start">
                 <div className="d-flex justify-content-between align-items-center mb-4 flex-wrap border-bottom pb-3">
                   <div>
-                    <h4 className="fw-bold text-primary-blue mb-1">Globe Trotter Confirmation</h4>
+                    <h4 className="fw-bold text-primary-blue mb-1">GlobeTrotter Confirmation</h4>
                     <span className="text-muted">Booking Reference: GT-CONF-{selectedTicket.id}</span>
                   </div>
                   <button onClick={() => window.print()} className="btn btn-outline-primary rounded-pill px-3 fw-bold d-flex align-items-center gap-2 btn-sm">

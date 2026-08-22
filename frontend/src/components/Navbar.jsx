@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { FaPlane, FaHotel, FaBus, FaSuitcase, FaCar, FaBrain, FaSignOutAlt } from 'react-icons/fa';
+import { FaPlane, FaHotel, FaBus, FaSuitcase, FaCar, FaBrain, FaSignOutAlt, FaSun, FaMoon } from 'react-icons/fa';
 import AuthModal from './AuthModal';
 
 const Navbar = () => {
@@ -10,6 +10,19 @@ const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [firstName, setFirstName] = useState('');
   const [isAdmin, setIsAdmin] = useState(false);
+
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem('theme') || 'light';
+  });
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prev => (prev === 'light' ? 'dark' : 'light'));
+  };
 
   const checkAuth = () => {
     const token = localStorage.getItem('access_token');
@@ -83,7 +96,7 @@ const Navbar = () => {
       <nav id="navbar" className="navbar navbar-expand-lg navbar-gt sticky-top">
         <div className="container">
           <Link className="navbar-brand d-flex align-items-center" to="/" style={{ textDecoration: 'none' }}>
-            <span style={{ fontSize: '28px', letterSpacing: '-1.5px', fontWeight: '800', color: 'var(--primary-sage)', fontFamily: "'Poppins', sans-serif", marginRight: '6px' }}>Globe</span>
+            <span style={{ fontSize: '28px', letterSpacing: '-1.5px', fontWeight: '800', color: 'var(--primary-sage)', fontFamily: "'Poppins', sans-serif" }}>Globe</span>
             <span style={{ fontSize: '28px', letterSpacing: '-1.5px', fontWeight: '800', color: '#ff3838', fontFamily: "'Poppins', sans-serif" }}>Trotter</span>
           </Link>
 
@@ -111,11 +124,7 @@ const Navbar = () => {
                     e.currentTarget.style.transform = 'translateY(0)';
                   }}
                 >
-                  {localStorage.getItem('user_avatar') ? (
-                    <img src={localStorage.getItem('user_avatar')} alt="Avatar" className="rounded-circle object-fit-cover border border-1 border-primary" style={{ width: '26px', height: '26px' }} />
-                  ) : (
-                    <i className='bx bx-user' style={{ fontSize: '18px' }}></i>
-                  )}
+                  <i className='bx bx-user' style={{ fontSize: '18px' }}></i>
                   <span>Hi, {firstName}</span>
                   {isAdmin && (
                     <span style={{
@@ -167,6 +176,23 @@ const Navbar = () => {
               </button>
             )}
 
+            {/* Theme Toggle Button */}
+            <button
+              onClick={toggleTheme}
+              className="d-flex align-items-center justify-content-center border-0 ms-1 p-2 rounded-circle"
+              title={theme === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'}
+              style={{
+                width: '38px',
+                height: '38px',
+                backgroundColor: theme === 'light' ? 'rgba(0, 0, 0, 0.05)' : 'rgba(255, 255, 255, 0.1)',
+                color: theme === 'light' ? '#333' : '#ffc107',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease'
+              }}
+            >
+              {theme === 'light' ? <FaMoon size={16} /> : <FaSun size={16} />}
+            </button>
+
             <button className="navbar-toggler border-0 d-lg-none bg-transparent p-0 ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText">
               <span className="navbar-toggler-icon"></span>
             </button>
@@ -196,14 +222,6 @@ const Navbar = () => {
                   to="/trips"
                 >
                   Plan Trips
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link
-                  className={`nav-link px-2.5 py-1.5 fw-semibold border-0 text-decoration-none ${location.pathname === '/community' ? 'active text-primary' : 'text-muted'}`}
-                  to="/community"
-                >
-                  Community
                 </Link>
               </li>
               <li className="nav-item">

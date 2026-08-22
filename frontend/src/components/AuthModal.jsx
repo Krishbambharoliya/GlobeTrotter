@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { FaCamera } from 'react-icons/fa';
 import api from '../api';
 
 const getErrorMessage = (err, defaultMsg) => {
@@ -35,24 +34,6 @@ const AuthModal = ({ isOpen, onClose, onSuccess }) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
 
-  const [city, setCity] = useState('');
-  const [country, setCountry] = useState('');
-  const [additionalInfo, setAdditionalInfo] = useState('');
-  const [profilePhoto, setProfilePhoto] = useState('https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80');
-
-  const fileInputRef = useRef(null);
-
-  const handlePhotoChange = (e) => {
-    const file = e.target.files && e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setProfilePhoto(reader.result);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
@@ -69,9 +50,6 @@ const AuthModal = ({ isOpen, onClose, onSuccess }) => {
       setPhoneNumber('');
       setFirstName('');
       setLastName('');
-      setCity('');
-      setCountry('');
-      setAdditionalInfo('');
     } else {
       document.body.style.overflow = 'unset';
     }
@@ -98,9 +76,6 @@ const AuthModal = ({ isOpen, onClose, onSuccess }) => {
         const profileRes = await api.get('users/profile/');
         localStorage.setItem('first_name', profileRes.data.first_name || username);
         localStorage.setItem('is_staff', profileRes.data.is_staff ? 'true' : 'false');
-        if (profileRes.data.avatar_url) {
-          localStorage.setItem('user_avatar', profileRes.data.avatar_url);
-        }
 
         setSuccess('Logged in successfully!');
         setTimeout(() => {
@@ -118,9 +93,7 @@ const AuthModal = ({ isOpen, onClose, onSuccess }) => {
           phone_number: phoneNumber,
           first_name: firstName,
           last_name: lastName,
-          password,
-          city,
-          country
+          password
         });
         setSuccess('Registration successful! Please login.');
         setAuthView('login');
@@ -133,56 +106,17 @@ const AuthModal = ({ isOpen, onClose, onSuccess }) => {
 
   return (
     <div className="modal show d-block animate-fade-in" tabIndex="-1" style={{ backgroundColor: 'rgba(0,0,0,0.55)', zIndex: 20000 }}>
-      <div className="modal-dialog modal-dialog-centered" style={{ maxWidth: authView === 'register' ? '650px' : '450px' }}>
+      <div className="modal-dialog modal-dialog-centered">
         <div className="modal-content border-0 rounded-4 shadow-lg overflow-hidden">
           <div className="modal-body p-0">
             <div className="p-4 p-md-5 text-start">
-              <div className="d-flex justify-content-between align-items-center mb-3">
+              <div className="d-flex justify-content-between align-items-center mb-4">
                 <h4 className="fw-bold text-dark-blue mb-0">
-                  {authView === 'login' && 'Welcome Back to Globe Trotter'}
-                  {authView === 'register' && 'Create Your Globe Trotter Account'}
+                  {authView === 'login' && 'Login to GlobeTrotter'}
+                  {authView === 'register' && 'Register on GlobeTrotter'}
                 </h4>
                 <button type="button" className="btn-close" onClick={onClose}></button>
               </div>
-
-              {/* Interactive User Photo Selector for Sign Up / Register */}
-              {authView === 'register' && (
-                <div className="d-flex flex-column align-items-center justify-content-center my-3">
-                  <div
-                    className="position-relative cursor-pointer"
-                    onClick={() => fileInputRef.current?.click()}
-                    title="Click to choose your profile photo"
-                    style={{ width: '84px', height: '84px' }}
-                  >
-                    <img
-                      src={profilePhoto}
-                      alt="User Profile Photo"
-                      className="rounded-circle border border-3 border-primary shadow-sm object-fit-cover w-100 h-100"
-                    />
-                    <div
-                      className="position-absolute bottom-0 end-0 bg-primary text-white rounded-circle d-flex align-items-center justify-content-center border border-2 border-white shadow"
-                      style={{ width: '26px', height: '26px', fontSize: '12px' }}
-                    >
-                      <FaCamera />
-                    </div>
-                  </div>
-                  <input
-                    type="file"
-                    ref={fileInputRef}
-                    onChange={handlePhotoChange}
-                    accept="image/*"
-                    className="d-none"
-                  />
-                  <button
-                    type="button"
-                    className="btn btn-link p-0 text-decoration-none mt-1 fw-semibold text-primary"
-                    onClick={() => fileInputRef.current?.click()}
-                    style={{ fontSize: '12px' }}
-                  >
-                    Choose Photo
-                  </button>
-                </div>
-              )}
 
               {error && <div className="alert alert-danger py-2 small">{error}</div>}
               {success && <div className="alert alert-success py-2 small">{success}</div>}
@@ -191,14 +125,14 @@ const AuthModal = ({ isOpen, onClose, onSuccess }) => {
                 {authView === 'login' && (
                   <>
                     <div className="mb-3">
-                      <label className="form-label small fw-bold">Username</label>
+                      <label className="form-label small fw-bold">Email / Username</label>
                       <input
                         type="text"
                         className="form-control rounded-3"
                         required
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
-                        placeholder="Username"
+                        placeholder="Enter email or username"
                       />
                     </div>
 
@@ -210,7 +144,7 @@ const AuthModal = ({ isOpen, onClose, onSuccess }) => {
                         required
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        placeholder="Password"
+                        placeholder="Enter password"
                       />
                     </div>
                   </>
@@ -218,6 +152,42 @@ const AuthModal = ({ isOpen, onClose, onSuccess }) => {
 
                 {authView === 'register' && (
                   <>
+                    <div className="mb-2">
+                      <label className="form-label small fw-bold">Username</label>
+                      <input
+                        type="text"
+                        className="form-control rounded-3"
+                        required
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                        placeholder="Choose username"
+                      />
+                    </div>
+
+                    <div className="mb-2">
+                      <label className="form-label small fw-bold">Email</label>
+                      <input
+                        type="email"
+                        className="form-control rounded-3"
+                        required
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="Enter email address"
+                      />
+                    </div>
+
+                    <div className="mb-2">
+                      <label className="form-label small fw-bold">Phone Number</label>
+                      <input
+                        type="text"
+                        className="form-control rounded-3"
+                        required
+                        value={phoneNumber}
+                        onChange={(e) => setPhoneNumber(e.target.value)}
+                        placeholder="Enter mobile number"
+                      />
+                    </div>
+
                     <div className="row g-2 mb-2">
                       <div className="col-6">
                         <label className="form-label small fw-bold">First Name</label>
@@ -243,67 +213,7 @@ const AuthModal = ({ isOpen, onClose, onSuccess }) => {
                       </div>
                     </div>
 
-                    <div className="row g-2 mb-2">
-                      <div className="col-6">
-                        <label className="form-label small fw-bold">Email Address</label>
-                        <input
-                          type="email"
-                          className="form-control rounded-3"
-                          required
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                          placeholder="Email Address"
-                        />
-                      </div>
-                      <div className="col-6">
-                        <label className="form-label small fw-bold">Phone Number</label>
-                        <input
-                          type="text"
-                          className="form-control rounded-3"
-                          required
-                          value={phoneNumber}
-                          onChange={(e) => setPhoneNumber(e.target.value)}
-                          placeholder="Phone Number"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="row g-2 mb-2">
-                      <div className="col-6">
-                        <label className="form-label small fw-bold">City</label>
-                        <input
-                          type="text"
-                          className="form-control rounded-3"
-                          value={city}
-                          onChange={(e) => setCity(e.target.value)}
-                          placeholder="City"
-                        />
-                      </div>
-                      <div className="col-6">
-                        <label className="form-label small fw-bold">Country</label>
-                        <input
-                          type="text"
-                          className="form-control rounded-3"
-                          value={country}
-                          onChange={(e) => setCountry(e.target.value)}
-                          placeholder="Country"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="mb-2">
-                      <label className="form-label small fw-bold">Username</label>
-                      <input
-                        type="text"
-                        className="form-control rounded-3"
-                        required
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                        placeholder="Choose Username"
-                      />
-                    </div>
-
-                    <div className="mb-2">
+                    <div className="mb-4">
                       <label className="form-label small fw-bold">Password</label>
                       <input
                         type="password"
@@ -311,22 +221,13 @@ const AuthModal = ({ isOpen, onClose, onSuccess }) => {
                         required
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        placeholder="Create Password"
+                        placeholder="Create password"
                       />
-                    </div>
-
-                    <div className="mb-3">
-                      <label className="form-label small fw-bold">Additional Information</label>
-                      <textarea
-                        className="form-control rounded-3"
-                        rows="2"
-                        value={additionalInfo}
-                        onChange={(e) => setAdditionalInfo(e.target.value)}
-                        placeholder="Additional Information ...."
-                      ></textarea>
                     </div>
                   </>
                 )}
+
+
 
                 <p className="text-muted small text-center mb-3" style={{ fontSize: '12px' }}>
                   By proceeding, you agree to our{' '}
@@ -340,8 +241,8 @@ const AuthModal = ({ isOpen, onClose, onSuccess }) => {
                   className="btn w-100 py-3 rounded-pill fw-bold text-white shadow-sm"
                   style={{ background: 'var(--primary-sage, #2d4a3e)' }}
                 >
-                  {authView === 'login' && 'Login Button'}
-                  {authView === 'register' && 'Register Users'}
+                  {authView === 'login' && 'Login'}
+                  {authView === 'register' && 'Register'}
                 </button>
               </form>
 

@@ -11,23 +11,10 @@ from django.utils import timezone
 from datetime import timedelta
 import json
 
-from rest_framework_simplejwt.tokens import RefreshToken
-
 class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
     permission_classes = (permissions.AllowAny,)
     serializer_class = UserSerializer
-
-    def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        user = serializer.save()
-        refresh = RefreshToken.for_user(user)
-        res_data = serializer.data
-        res_data['access'] = str(refresh.access_token)
-        res_data['refresh'] = str(refresh)
-        headers = self.get_success_headers(serializer.data)
-        return Response(res_data, status=status.HTTP_201_CREATED, headers=headers)
 
 class UserProfileView(APIView):
     permission_classes = (permissions.IsAuthenticated,)
@@ -59,9 +46,6 @@ class UserProfileView(APIView):
         profile.save()
         
         return Response(UserSerializer(user).data)
-
-    def patch(self, request):
-        return self.put(request)
 
     def delete(self, request):
         user = request.user

@@ -12,10 +12,6 @@ class Train(models.Model):
     total_seats = models.IntegerField(default=60)
     available_seats = models.IntegerField(default=60)
     booked_seats = models.TextField(default='[]') # JSON array of booked seat identifiers e.g. ["A1", "A2"]
-    departure_platform = models.CharField(max_length=50, default='Platform 1')
-    arrival_platform = models.CharField(max_length=50, default='Platform 2')
-    district_name = models.CharField(max_length=100, blank=True, null=True)
-    sub_district_name = models.CharField(max_length=100, blank=True, null=True)
 
     def __str__(self):
-        return f"{self.name} ({self.train_number}): {self.source_city} ({self.departure_platform}) -> {self.destination_city} ({self.arrival_platform})"
+        return f"{self.name} ({self.train_number}): {self.source_city} -> {self.destination_city}"

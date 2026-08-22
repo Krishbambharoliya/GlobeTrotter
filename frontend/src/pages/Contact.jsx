@@ -78,7 +78,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <h6 className="fw-bold mb-1 text-dark-blue" style={{ fontSize: '15px' }}>Corporate Office</h6>
-                  <p className="text-muted small mb-1 fw-medium">Globe Trotter Travel Systems Pvt. Ltd.</p>
+                  <p className="text-muted small mb-1 fw-medium">GlobeTrotter Travel Systems Pvt. Ltd.</p>
                   <p className="text-muted small mb-0">DLF Cyber City, Phase III, Gurgaon, Haryana, India</p>
                 </div>
               </div>
