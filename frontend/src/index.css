@@ -27,22 +27,22 @@
   --sage-hover: #6ae0b7;
   --champagne-gold: #fce1b6;
   --gold-hover: #fff0d4;
-  --warm-cream: #0f172a;
-  --warm-card: #1e293b;
+  --warm-cream: #0b0f19;
+  --warm-card: #131c2e;
   --text-dark: #f8fafc;
   --text-muted: #94a3b8;
-  --border-color: #334155;
-  --card-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
-  --hover-shadow: 0 25px 50px rgba(0, 0, 0, 0.8);
-  --glass-bg: rgba(30, 41, 59, 0.95);
-  --glass-border: rgba(148, 163, 184, 0.2);
-  --hero-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+  --border-color: #2a384c;
+  --card-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
+  --hover-shadow: 0 25px 50px rgba(0, 0, 0, 0.9);
+  --glass-bg: rgba(19, 28, 46, 0.96);
+  --glass-border: rgba(148, 163, 184, 0.25);
+  --hero-gradient: linear-gradient(135deg, #0b0f19 0%, #131c2e 50%, #0b0f19 100%);
 }
 
 [data-theme="dark"] body,
 [data-theme="dark"] html,
 [data-theme="dark"] .min-vh-100 {
-  background-color: #0f172a !important;
+  background-color: #0b0f19 !important;
   color: #f8fafc !important;
 }
 
@@ -52,9 +52,14 @@
 [data-theme="dark"] .modal-content,
 [data-theme="dark"] .dropdown-menu,
 [data-theme="dark"] .search-field-box {
-  background-color: #1e293b !important;
+  background-color: #131c2e !important;
   color: #f8fafc !important;
-  border-color: #334155 !important;
+  border: 1px solid #2a384c !important;
+}
+
+[data-theme="dark"] .search-fields-grid {
+  border: 1px solid #2a384c !important;
+  border-radius: 16px !important;
 }
 
 [data-theme="dark"] .modal-header,
@@ -62,8 +67,8 @@
 [data-theme="dark"] .modal-footer,
 [data-theme="dark"] .card-header,
 [data-theme="dark"] .card-footer {
-  border-color: #334155 !important;
-  background-color: #1e293b !important;
+  border-color: #2a384c !important;
+  background-color: #131c2e !important;
   color: #f8fafc !important;
 }
 
@@ -91,9 +96,17 @@
 [data-theme="dark"] .form-control,
 [data-theme="dark"] .form-select,
 [data-theme="dark"] .input-group-text {
-  background-color: #0f172a !important;
+  background-color: #0b0f19 !important;
   color: #f8fafc !important;
-  border-color: #334155 !important;
+  border: 1px solid #2a384c !important;
+}
+
+[data-theme="dark"] input:focus,
+[data-theme="dark"] select:focus,
+[data-theme="dark"] textarea:focus,
+[data-theme="dark"] .form-control:focus {
+  border-color: #38bdf8 !important;
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.25) !important;
 }
 
 [data-theme="dark"] input::placeholder,
@@ -104,8 +117,8 @@
 
 [data-theme="dark"] .navbar-gt,
 [data-theme="dark"] .navbar {
-  background-color: #1e293b !important;
-  border-bottom-color: #334155 !important;
+  background-color: #131c2e !important;
+  border-bottom: 1px solid #2a384c !important;
 }
 
 [data-theme="dark"] .navbar-gt .nav-link,
@@ -117,26 +130,27 @@
 [data-theme="dark"] .nav-link.active {
   color: #38bdf8 !important;
   background-color: rgba(56, 189, 248, 0.15) !important;
+  border-radius: 8px !important;
 }
 
 [data-theme="dark"] .list-group-item {
-  background-color: #1e293b !important;
+  background-color: #131c2e !important;
   color: #f8fafc !important;
-  border-color: #334155 !important;
+  border: 1px solid #2a384c !important;
 }
 
 [data-theme="dark"] .table,
 [data-theme="dark"] .table td,
 [data-theme="dark"] .table th {
-  border-color: #334155 !important;
-  background-color: #1e293b !important;
+  border-color: #2a384c !important;
+  background-color: #131c2e !important;
   color: #f8fafc !important;
 }
 
 [data-theme="dark"] .table-light,
 [data-theme="dark"] .table-light th,
 [data-theme="dark"] .table-light td {
-  background-color: #0f172a !important;
+  background-color: #0b0f19 !important;
   color: #f8fafc !important;
 }
 
@@ -145,14 +159,14 @@
 [data-theme="dark"] .border-bottom,
 [data-theme="dark"] .border-start,
 [data-theme="dark"] .border-end {
-  border-color: #334155 !important;
+  border-color: #2a384c !important;
 }
 
 [data-theme="dark"] footer,
 [data-theme="dark"] .footer {
-  background-color: #0f172a !important;
+  background-color: #0b0f19 !important;
   color: #cbd5e1 !important;
-  border-top-color: #334155 !important;
+  border-top: 1px solid #2a384c !important;
 }
 
 [data-theme="dark"] .btn-close {
@@ -165,7 +179,7 @@
 
 [data-theme="dark"] .dropdown-item:hover,
 [data-theme="dark"] .dropdown-item:focus {
-  background-color: #334155 !important;
+  background-color: #2a384c !important;
   color: #38bdf8 !important;
 }
 
