@@ -100,6 +100,8 @@ const ItineraryView = () => {
   // Calendar events generator for calendar view display
   const totalDays = trip.stops ? trip.stops.length : 0;
 
+  const [viewMode, setViewMode] = useState('timeline'); // 'timeline' or 'calendar'
+
   return (
     <div className="container py-5" style={{ maxWidth: '1000px' }}>
       
@@ -163,11 +165,51 @@ const ItineraryView = () => {
       </div>
 
       <div className="row g-4">
-        {/* Left Side: Day Timeline */}
+        {/* Left Side: Day Timeline or Calendar Grid */}
         <div className="col-lg-7">
-          <h4 className="fw-bold text-dark-blue mb-3">Day-wise Timeline</h4>
-          
-          <div className="d-flex flex-column gap-3.5 position-relative">
+          <div className="d-flex justify-content-between align-items-center mb-3">
+            <h4 className="fw-bold text-dark-blue mb-0">Itinerary Flow</h4>
+            <div className="btn-group btn-group-sm rounded-pill p-1 bg-light border">
+              <button 
+                onClick={() => setViewMode('timeline')}
+                className={`btn btn-sm rounded-pill fw-bold ${viewMode === 'timeline' ? 'btn-primary shadow-sm' : 'btn-light border-0 text-muted'}`}
+              >
+                Timeline View
+              </button>
+              <button 
+                onClick={() => setViewMode('calendar')}
+                className={`btn btn-sm rounded-pill fw-bold ${viewMode === 'calendar' ? 'btn-primary shadow-sm' : 'btn-light border-0 text-muted'}`}
+              >
+                Calendar View
+              </button>
+            </div>
+          </div>
+
+          {viewMode === 'calendar' ? (
+            <div className="card border-0 shadow-sm rounded-4 bg-white p-4">
+              <h6 className="fw-bold text-dark-blue mb-3">Calendar Grid View ({trip.start_date})</h6>
+              <div className="row g-2 text-center font-monospace mb-2 fw-bold text-muted small">
+                <div className="col">Sun</div><div className="col">Mon</div><div className="col">Tue</div><div className="col">Wed</div><div className="col">Thu</div><div className="col">Fri</div><div className="col">Sat</div>
+              </div>
+              <div className="d-flex flex-column gap-3 mt-3">
+                {trip.stops?.map((stop, sIdx) => (
+                  <div className="p-3 border rounded-3 bg-light text-start" key={sIdx}>
+                    <div className="d-flex justify-content-between align-items-center mb-1">
+                      <span className="badge bg-primary rounded-pill">Day {sIdx + 1} - {stop.date}</span>
+                      <strong className="text-dark-blue">{stop.city_name}</strong>
+                    </div>
+                    {stop.activities?.map((act, aIdx) => (
+                      <div className="small text-muted border-top pt-1 mt-1 d-flex justify-content-between" key={aIdx}>
+                        <span>• {act.name} ({act.start_time})</span>
+                        <span className="fw-semibold text-dark">${(parseFloat(act.cost) || 0).toFixed(2)}</span>
+                      </div>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <div className="d-flex flex-column gap-3.5 position-relative">
             {trip.stops?.length === 0 ? (
               <div className="bg-white p-4 rounded-4 shadow-sm border text-muted">
                 No stops added yet. Edit this trip to add stops and activities.
@@ -224,6 +266,7 @@ const ItineraryView = () => {
               })
             )}
           </div>
+          )}
         </div>
 
         {/* Right Side: Cost Breakdown & Budget */}

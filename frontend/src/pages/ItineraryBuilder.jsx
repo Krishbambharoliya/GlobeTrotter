@@ -119,20 +119,26 @@ const ItineraryBuilder = () => {
     setStops(stops.filter((_, i) => i !== index));
   };
 
-  const moveStop = (index, direction) => {
+  const [draggedStopIndex, setDraggedStopIndex] = useState(null);
+
+  const handleDragStart = (e, index) => {
+    setDraggedStopIndex(index);
+    e.dataTransfer.effectAllowed = "move";
+  };
+
+  const handleDragOver = (e, index) => {
+    e.preventDefault();
+  };
+
+  const handleDrop = (e, targetIndex) => {
+    e.preventDefault();
+    if (draggedStopIndex === null || draggedStopIndex === targetIndex) return;
     const newStops = [...stops];
-    if (direction === 'up' && index > 0) {
-      const temp = newStops[index];
-      newStops[index] = newStops[index - 1];
-      newStops[index - 1] = temp;
-    } else if (direction === 'down' && index < newStops.length - 1) {
-      const temp = newStops[index];
-      newStops[index] = newStops[index + 1];
-      newStops[index + 1] = temp;
-    }
-    // Update order values
+    const [reorderedItem] = newStops.splice(draggedStopIndex, 1);
+    newStops.splice(targetIndex, 0, reorderedItem);
     const ordered = newStops.map((stop, idx) => ({ ...stop, order: idx }));
     setStops(ordered);
+    setDraggedStopIndex(null);
   };
 
   // Stop Details editing
@@ -294,7 +300,14 @@ const ItineraryBuilder = () => {
           </div>
         ) : (
           stops.map((stop, stopIndex) => (
-            <div className="card border-0 shadow-sm rounded-4 overflow-hidden bg-white p-4" key={stopIndex}>
+            <div 
+              className="card border-0 shadow-sm rounded-4 overflow-hidden bg-white p-4 cursor-grab" 
+              key={stopIndex}
+              draggable
+              onDragStart={(e) => handleDragStart(e, stopIndex)}
+              onDragOver={(e) => handleDragOver(e, stopIndex)}
+              onDrop={(e) => handleDrop(e, stopIndex)}
+            >
               
               {/* Stop Header */}
               <div className="d-flex justify-content-between align-items-start border-bottom pb-3 mb-3 flex-wrap gap-2">

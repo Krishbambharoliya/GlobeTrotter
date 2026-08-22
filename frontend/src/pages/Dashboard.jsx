@@ -736,19 +736,55 @@ const Dashboard = () => {
                   </div>
                   <div className="col-md-6">
                     <div className="p-3 rounded-3 border border-light-subtle bg-white">
-                      <span className="small text-muted d-block" style={{ fontSize: '11px' }}>Coins</span>
-                      <strong className="text-muted d-block mt-1 fw-bold" style={{ fontSize: '14px' }}>Coming Soon</strong>
+                      <span className="small text-muted d-block" style={{ fontSize: '11px' }}>Language Preference</span>
+                      <select className="form-select form-select-sm border-0 bg-transparent fw-bold text-dark mt-0 p-0 shadow-none">
+                        <option value="en">English (US)</option>
+                        <option value="es">Español (Spanish)</option>
+                        <option value="fr">Français (French)</option>
+                        <option value="de">Deutsch (German)</option>
+                        <option value="ja">日本語 (Japanese)</option>
+                      </select>
                     </div>
                   </div>
                 </div>
 
-                {/* Edit Profile Navigation Button */}
-                <div className="text-start">
+                {/* Saved Destinations Section */}
+                <div className="p-3 rounded-4 border bg-white mb-4 text-start">
+                  <h6 className="fw-bold mb-2 text-dark-blue">Saved Destinations List</h6>
+                  <div className="d-flex flex-wrap gap-2">
+                    <span className="badge bg-secondary-subtle text-dark border px-3 py-2 rounded-pill">📍 Paris, France</span>
+                    <span className="badge bg-secondary-subtle text-dark border px-3 py-2 rounded-pill">📍 Tokyo, Japan</span>
+                    <span className="badge bg-secondary-subtle text-dark border px-3 py-2 rounded-pill">📍 Rome, Italy</span>
+                    <span className="badge bg-secondary-subtle text-dark border px-3 py-2 rounded-pill">📍 Goa, India</span>
+                    <button className="btn btn-sm btn-outline-primary rounded-pill px-3 py-1 fw-bold">+ Add Favorite</button>
+                  </div>
+                </div>
+
+                {/* Edit Profile Navigation Button & Delete Account */}
+                <div className="text-start d-flex justify-content-between align-items-center flex-wrap gap-2">
                   <button
                     onClick={() => setActiveSubTab('profile_edit')}
                     className="btn btn-warning text-white rounded-pill px-4 py-2 fw-bold d-flex align-items-center gap-2 shadow-sm transition-all"
                   >
                     <FaEdit /> Edit Profile Info
+                  </button>
+
+                  <button
+                    onClick={async () => {
+                      if (window.confirm("CAUTION: Are you sure you want to delete your account? This action cannot be undone.")) {
+                        try {
+                          await api.delete('users/profile/');
+                          localStorage.clear();
+                          alert('Your account has been deleted.');
+                          window.location.href = '/';
+                        } catch (err) {
+                          alert('Failed to delete account.');
+                        }
+                      }
+                    }}
+                    className="btn btn-outline-danger rounded-pill px-4 py-2 fw-bold"
+                  >
+                    Delete Account
                   </button>
                 </div>
               </div>

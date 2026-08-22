@@ -47,6 +47,11 @@ class UserProfileView(APIView):
         
         return Response(UserSerializer(user).data)
 
+    def delete(self, request):
+        user = request.user
+        user.delete()
+        return Response({"message": "Account deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
+
 class ChangePasswordView(APIView):
     permission_classes = (permissions.IsAuthenticated,)
     
