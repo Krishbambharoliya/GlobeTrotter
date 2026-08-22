@@ -41,19 +41,49 @@
 
 [data-theme="dark"] body,
 [data-theme="dark"] html,
-[data-theme="dark"] .min-vh-100 {
+[data-theme="dark"] #root,
+[data-theme="dark"] .min-vh-100,
+[data-theme="dark"] .search-results-page,
+[data-theme="dark"] .booking-details-page,
+[data-theme="dark"] .payment-page,
+[data-theme="dark"] .dashboard-page,
+[data-theme="dark"] .admin-dashboard-page,
+[data-theme="dark"] .services-page,
+[data-theme="dark"] .contact-page,
+[data-theme="dark"] .about-page,
+[data-theme="dark"] .privacy-page,
+[data-theme="dark"] .terms-page {
   background-color: #0f172a !important;
   color: #f8fafc !important;
 }
 
 [data-theme="dark"] .bg-light,
 [data-theme="dark"] .bg-white,
+[data-theme="dark"] .bg-light-subtle,
+[data-theme="dark"] .bg-secondary-subtle,
+[data-theme="dark"] .bg-body,
+[data-theme="dark"] .bg-body-tertiary,
 [data-theme="dark"] .card,
+[data-theme="dark"] .filter-card,
+[data-theme="dark"] .result-card,
 [data-theme="dark"] .modal-content,
 [data-theme="dark"] .dropdown-menu,
 [data-theme="dark"] .search-field-box {
   background-color: #1e293b !important;
   color: #f8fafc !important;
+  border-color: #334155 !important;
+}
+
+[data-theme="dark"] .filter-section-header,
+[data-theme="dark"] .filter-title {
+  color: #f8fafc !important;
+}
+
+[data-theme="dark"] .border,
+[data-theme="dark"] .border-top,
+[data-theme="dark"] .border-bottom,
+[data-theme="dark"] .border-start,
+[data-theme="dark"] .border-end {
   border-color: #334155 !important;
 }
 
