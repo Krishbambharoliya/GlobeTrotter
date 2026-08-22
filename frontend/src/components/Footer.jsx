@@ -35,9 +35,8 @@ const Footer = () => {
           {/* About Column */}
           <div className="footlinks" style={{ flex: '1', minWidth: '250px', margin: '15px 10px' }}>
             <Link className="d-flex align-items-center mb-3 text-decoration-none" to="/" onClick={(e) => handleLinkClick(e, '/', 'navbar')}>
-              <span style={{ fontSize: '26px', letterSpacing: '-1.5px', fontWeight: '800', color: '#ffffff', fontFamily: "'Poppins', sans-serif" }}>plan</span>
-              <span style={{ fontSize: '16px', fontWeight: '800', backgroundColor: '#ff3838', color: '#ffffff', padding: '2px 7px', borderRadius: '5px', fontFamily: "'Poppins', sans-serif", margin: '0 5px', textTransform: 'lowercase', display: 'inline-block', lineHeight: '1.2' }}>your</span>
-              <span style={{ fontSize: '26px', letterSpacing: '-1.5px', fontWeight: '800', color: '#ffffff', fontFamily: "'Poppins', sans-serif" }}>trip</span>
+              <span style={{ fontSize: '26px', letterSpacing: '-1.5px', fontWeight: '800', color: '#ffffff', fontFamily: "'Poppins', sans-serif" }}>Globe</span>
+              <span style={{ fontSize: '26px', letterSpacing: '-1.5px', fontWeight: '800', color: '#ff3838', fontFamily: "'Poppins', sans-serif" }}>Trotter</span>
             </Link>
             <p style={{ color: '#dddddd', fontSize: '15px', lineHeight: '1.6', marginTop: '15px', fontWeight: '500', marginBottom: '8px' }}>
               Making travel planning simple, smart & stress-free
