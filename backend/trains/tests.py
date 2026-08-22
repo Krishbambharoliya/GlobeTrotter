@@ -14,15 +14,27 @@ class TrainsAPITestCase(TestCase):
             departure_time='2026-07-15 17:00:00',
             arrival_time='2026-07-16 08:32:00',
             price=2800.00,
-            train_type='3AC'
+            train_type='3AC',
+            departure_platform='Platform 3',
+            arrival_platform='Platform 5'
         )
 
     def test_list_trains(self):
         response = self.client.get('/api/trains/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 1)
+        self.assertEqual(response.data[0]['departure_platform'], 'Platform 3')
 
     def test_filter_trains_by_station(self):
         response = self.client.get('/api/trains/?from_city=Mumbai&to_city=Delhi')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 1)
+
+    def test_filter_trains_by_platform(self):
+        response = self.client.get('/api/trains/?platform=Platform 3')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data), 1)
+
+    def test_location_search_api(self):
+        response = self.client.get('/api/trains/locations/?q=Surat')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)

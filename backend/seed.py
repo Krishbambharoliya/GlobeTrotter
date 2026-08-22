@@ -163,7 +163,11 @@ def seed_trains():
                         train_type=train_type,
                         total_seats=60,
                         available_seats=random.randint(5, 60),
-                        booked_seats='[]'
+                        booked_seats='[]',
+                        departure_platform=f"Platform {random.randint(1, 8)}",
+                        arrival_platform=f"Platform {random.randint(1, 8)}",
+                        district_name=dep,
+                        sub_district_name=f"{dep} Central"
                     )
                     train_count += 1
     print(f"Successfully seeded {train_count} trains!")

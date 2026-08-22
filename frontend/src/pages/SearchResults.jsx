@@ -101,6 +101,7 @@ const SearchResults = ({ type }) => {
   const [selectedAirline, setSelectedAirline] = useState('All');
   const [selectedRating, setSelectedRating] = useState(0);
   const [selectedTrainType, setSelectedTrainType] = useState('All');
+  const [selectedPlatform, setSelectedPlatform] = useState('All');
   const [selectedCarType, setSelectedCarType] = useState('All');
   const [selectedBusType, setSelectedBusType] = useState('All');
 
@@ -286,6 +287,11 @@ const SearchResults = ({ type }) => {
     // Train Type Filter
     if (type === 'trains' && selectedTrainType !== 'All') {
       temp = temp.filter(item => item.train_type.includes(selectedTrainType));
+    }
+
+    // Train Platform Filter
+    if (type === 'trains' && selectedPlatform !== 'All') {
+      temp = temp.filter(item => (item.departure_platform || '').includes(selectedPlatform));
     }
 
     // Bus Type Filter
@@ -599,16 +605,33 @@ const SearchResults = ({ type }) => {
 
               {/* Train specific filter */}
               {type === 'trains' && (
-                <div className="mb-4">
-                  <span className="filter-section-header">Train Coach Type</span>
-                  <select className="form-select rounded-3" value={selectedTrainType} onChange={(e) => setSelectedTrainType(e.target.value)}>
-                    <option value="All">All Coach Types</option>
-                    <option value="1AC">1AC (First Class)</option>
-                    <option value="2AC">2AC (Two Tier)</option>
-                    <option value="3AC">3AC (Three Tier)</option>
-                    <option value="SL">SL (Sleeper Class)</option>
-                  </select>
-                </div>
+                <>
+                  <div className="mb-3">
+                    <span className="filter-section-header">Train Coach Type</span>
+                    <select className="form-select rounded-3" value={selectedTrainType} onChange={(e) => setSelectedTrainType(e.target.value)}>
+                      <option value="All">All Coach Types</option>
+                      <option value="1AC">1AC (First Class)</option>
+                      <option value="2AC">2AC (Two Tier)</option>
+                      <option value="3AC">3AC (Three Tier)</option>
+                      <option value="SL">SL (Sleeper Class)</option>
+                    </select>
+                  </div>
+
+                  <div className="mb-4">
+                    <span className="filter-section-header">Platform Selection</span>
+                    <select className="form-select rounded-3" value={selectedPlatform} onChange={(e) => setSelectedPlatform(e.target.value)}>
+                      <option value="All">All Platforms</option>
+                      <option value="Platform 1">Platform 1</option>
+                      <option value="Platform 2">Platform 2</option>
+                      <option value="Platform 3">Platform 3</option>
+                      <option value="Platform 4">Platform 4</option>
+                      <option value="Platform 5">Platform 5</option>
+                      <option value="Platform 6">Platform 6</option>
+                      <option value="Platform 7">Platform 7</option>
+                      <option value="Platform 8">Platform 8</option>
+                    </select>
+                  </div>
+                </>
               )}
 
               {/* Bus specific filter */}
@@ -827,12 +850,22 @@ const SearchResults = ({ type }) => {
                           </div>
                           <div className="col-md-3">
                             <div className="fw-bold fs-5">{formatDate(train.departure_time)}</div>
-                            <small className="text-muted">{train.source_city}</small>
+                            <small className="text-dark fw-semibold">{train.source_city}</small>
+                            <div className="mt-1">
+                              <span className="badge bg-danger bg-opacity-10 text-danger border border-danger border-opacity-25 px-2 py-0.5 rounded-pill small fw-bold">
+                                Dep: {train.departure_platform || 'Platform 1'}
+                              </span>
+                            </div>
                             <div className="small text-muted mt-1">{formatDateShort(train.departure_time)}</div>
                           </div>
                           <div className="col-md-3">
                             <div className="fw-bold fs-5">{formatDate(train.arrival_time)}</div>
-                            <small className="text-muted">{train.destination_city}</small>
+                            <small className="text-dark fw-semibold">{train.destination_city}</small>
+                            <div className="mt-1">
+                              <span className="badge bg-success bg-opacity-10 text-success border border-success border-opacity-25 px-2 py-0.5 rounded-pill small fw-bold">
+                                Arr: {train.arrival_platform || 'Platform 2'}
+                              </span>
+                            </div>
                             <div className="small text-muted mt-1">{formatDateShort(train.arrival_time)}</div>
                           </div>
                           <div className="col-md-3 text-md-end mt-3 mt-md-0 d-flex flex-md-column justify-content-between align-items-center align-items-md-end">
