@@ -43,6 +43,7 @@
 [data-theme="dark"] html,
 [data-theme="dark"] #root,
 [data-theme="dark"] .min-vh-100,
+[data-theme="dark"] .home-content-wrapper,
 [data-theme="dark"] .search-results-page,
 [data-theme="dark"] .booking-details-page,
 [data-theme="dark"] .payment-page,
@@ -54,6 +55,7 @@
 [data-theme="dark"] .privacy-page,
 [data-theme="dark"] .terms-page {
   background-color: #0f172a !important;
+  background: #0f172a !important;
   color: #f8fafc !important;
 }
 
@@ -72,6 +74,39 @@
   background-color: #1e293b !important;
   color: #f8fafc !important;
   border-color: #334155 !important;
+}
+
+/* Category Search Tab Cards in Dark Mode */
+[data-theme="dark"] .search-card-tab {
+  background-color: #1e293b !important;
+  background: #1e293b !important;
+  border-color: #334155 !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4) !important;
+}
+
+[data-theme="dark"] .search-card-tab span {
+  color: #f8fafc !important;
+}
+
+[data-theme="dark"] .search-card-tab.active {
+  background-color: #1e293b !important;
+  background: #1e293b !important;
+  border-color: #38bdf8 !important;
+  box-shadow: 0 8px 24px rgba(56, 189, 248, 0.25) !important;
+}
+
+[data-theme="dark"] .search-card-tab.active span {
+  color: #38bdf8 !important;
+}
+
+[data-theme="dark"] .search-card-tab:hover {
+  border-color: #38bdf8 !important;
+  background-color: #253346 !important;
+  background: #253346 !important;
+}
+
+[data-theme="dark"] .search-card-tab:hover span {
+  color: #38bdf8 !important;
 }
 
 [data-theme="dark"] .filter-section-header,
@@ -681,7 +716,7 @@ nav.navbar-gt .navbar-collapse .navbar-nav .nav-link.active {
 }
 
 .home-content-wrapper {
-  background: linear-gradient(to bottom, #fff0f3 0%, #ffffff 100%) no-repeat !important;
+  background: linear-gradient(to bottom, #fff0f3 0%, #ffffff 100%) no-repeat;
   background-attachment: fixed !important;
   position: relative;
   z-index: 2;
