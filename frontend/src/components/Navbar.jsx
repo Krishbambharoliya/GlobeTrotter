@@ -102,6 +102,22 @@ const Navbar = () => {
           </Link>
 
           <div className="d-flex align-items-center gap-2 order-lg-last">
+            {/* Dark / Light Mode Toggle Button */}
+            <button
+              onClick={toggleTheme}
+              className="btn btn-sm rounded-circle d-flex align-items-center justify-content-center p-2 border shadow-sm"
+              title={theme === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'}
+              style={{
+                width: '38px',
+                height: '38px',
+                backgroundColor: theme === 'light' ? '#f1f5f9' : '#334155',
+                color: theme === 'light' ? '#0f172a' : '#f8fafc',
+                cursor: 'pointer'
+              }}
+            >
+              {theme === 'light' ? <FaMoon size={16} /> : <FaSun size={16} />}
+            </button>
+
             {isLoggedIn ? (
               <>
                 <Link

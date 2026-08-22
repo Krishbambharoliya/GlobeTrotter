@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams, Link } from 'react-router-dom';
-import { FaPlane, FaHotel, FaBus, FaSuitcase, FaCar, FaPercentage, FaSignOutAlt, FaStar, FaChevronRight, FaHeart, FaRegHeart, FaWifi, FaSwimmingPool, FaSpa, FaDumbbell, FaUtensils, FaParking, FaConciergeBell, FaGlassMartiniAlt, FaSearch, FaFilter, FaTimes, FaCheck } from 'react-icons/fa';
+import { FaPlane, FaHotel, FaBus, FaSuitcase, FaCar, FaPercentage, FaSignOutAlt, FaStar, FaChevronRight, FaHeart, FaRegHeart, FaWifi, FaSwimmingPool, FaSpa, FaDumbbell, FaUtensils, FaParking, FaConciergeBell, FaGlassMartiniAlt, FaSearch, FaFilter, FaTimes, FaCheck, FaSun, FaMoon } from 'react-icons/fa';
 import api from '../api';
 import AuthModal from '../components/AuthModal';
 import poolVideo from '../assets/Pool_Woman.mp4';
@@ -266,6 +266,16 @@ const Home = () => {
   const [selectedPkgInclusions, setSelectedPkgInclusions] = useState([]);
   const [selectedPkgMinRating, setSelectedPkgMinRating] = useState(0);
   const [pkgSortBy, setPkgSortBy] = useState('price_low');
+
+  // Theme state
+  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'light');
+
+  const toggleTheme = () => {
+    const nextTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(nextTheme);
+    document.documentElement.setAttribute('data-theme', nextTheme);
+    localStorage.setItem('theme', nextTheme);
+  };
 
   // Extra states for homepage limit pagination & debouncing
   const [homeHotelLimit, setHomeHotelLimit] = useState(6);
@@ -571,6 +581,22 @@ const Home = () => {
           </Link>
 
           <div className="d-flex align-items-center gap-2 order-lg-last">
+            {/* Dark / Light Mode Toggle Button */}
+            <button
+              onClick={toggleTheme}
+              className="btn btn-sm rounded-circle d-flex align-items-center justify-content-center p-2 border shadow-sm"
+              title={theme === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'}
+              style={{
+                width: '38px',
+                height: '38px',
+                backgroundColor: theme === 'light' ? '#f1f5f9' : '#334155',
+                color: theme === 'light' ? '#0f172a' : '#f8fafc',
+                cursor: 'pointer'
+              }}
+            >
+              {theme === 'light' ? <FaMoon size={16} /> : <FaSun size={16} />}
+            </button>
+
             {isLoggedIn ? (
               <>
                 <Link
