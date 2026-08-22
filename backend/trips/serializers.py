@@ -3,19 +3,33 @@ from django.contrib.auth.models import User
 from .models import Trip, TripStop, TripActivity
 
 class TripActivitySerializer(serializers.ModelSerializer):
-    id = serializers.IntegerField(required=False)
+    id = serializers.IntegerField(required=False, allow_null=True)
+    name = serializers.CharField(required=False, allow_blank=True, default='Activity')
+    category = serializers.CharField(required=False, allow_blank=True, default='Sightseeing')
+    cost = serializers.DecimalField(max_digits=12, decimal_places=2, required=False, default=0.00)
+    duration_hours = serializers.DecimalField(max_digits=5, decimal_places=2, required=False, default=1.00)
+    start_time = serializers.CharField(required=False, allow_blank=True, allow_null=True, default='09:00 AM')
+    order = serializers.IntegerField(required=False, default=0)
 
     class Meta:
         model = TripActivity
         fields = ['id', 'name', 'description', 'category', 'cost', 'duration_hours', 'start_time', 'order']
 
 class TripStopSerializer(serializers.ModelSerializer):
-    id = serializers.IntegerField(required=False)
+    id = serializers.IntegerField(required=False, allow_null=True)
     activities = TripActivitySerializer(many=True, required=False)
 
     class Meta:
         model = TripStop
         fields = ['id', 'city_name', 'country_name', 'cost_index', 'popularity', 'date', 'order', 'activities']
+        extra_kwargs = {
+            'city_name': {'required': False, 'allow_blank': True, 'default': 'Destination City'},
+            'country_name': {'required': False, 'allow_blank': True, 'default': 'Country'},
+            'cost_index': {'required': False, 'allow_blank': True, 'default': '$$'},
+            'popularity': {'required': False, 'allow_blank': True, 'default': 'High'},
+            'date': {'required': False, 'allow_null': True},
+            'order': {'required': False, 'default': 0}
+        }
 
 class TripSerializer(serializers.ModelSerializer):
     stops = TripStopSerializer(many=True, required=False)
