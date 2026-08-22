@@ -80,7 +80,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav id="navbar" className="navbar navbar-expand-lg navbar-mmt sticky-top">
+      <nav id="navbar" className="navbar navbar-expand-lg navbar-gt sticky-top">
         <div className="container">
           <Link className="navbar-brand d-flex align-items-center" to="/" style={{ textDecoration: 'none' }}>
             <span style={{ fontSize: '28px', letterSpacing: '-1.5px', fontWeight: '800', color: 'var(--primary-sage)', fontFamily: "'Poppins', sans-serif" }}>Globe</span>

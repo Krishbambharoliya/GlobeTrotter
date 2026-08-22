@@ -46,7 +46,7 @@ class AIChatbotView(APIView):
         elif 'hotel' in message or 'stay' in message:
             reply = "We offer premium hotels in Delhi, Mumbai, Bengaluru, and Goa. You can filter by ratings and view photos. Bookings are fully manageable from your profile dashboard."
         elif 'cancel' in message or 'refund' in message:
-            reply = "Cancellations can be made instantly in the 'My Bookings' section of your Dashboard. Refunds are credited back to your MMT Wallet immediately."
+            reply = "Cancellations can be made instantly in the 'My Bookings' section of your Dashboard. Refunds are credited back to your GlobeTrotter Wallet immediately."
         elif 'discount' in message or 'coupon' in message or 'offer' in message:
             reply = "Currently active coupons are MMTFLIGHT (15% off flights), MMTHOTEL (25% off hotels), and MMTTRAIN (10% off train tickets). Apply them in your Booking Details page!"
             

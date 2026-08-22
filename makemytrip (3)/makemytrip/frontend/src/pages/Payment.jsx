@@ -65,7 +65,7 @@ const Payment = () => {
     if (paymentMethod === 'Wallet') {
       const rawBal = profile?.profile?.wallet_balance ?? profile?.wallet_balance ?? 0;
       if (parseFloat(rawBal) < parseFloat(booking.total_price)) {
-        setPaymentError('Insufficient MMT Wallet balance. Please use another method.');
+        setPaymentError('Insufficient GlobeTrotter Wallet balance. Please use another method.');
         return;
       }
     }
@@ -126,7 +126,7 @@ const Payment = () => {
               <div className="p-3 bg-light rounded-3 text-start mb-3 border">
                 <div className="d-flex justify-content-between mb-1">
                   <span className="text-muted small">Booking Reference:</span>
-                  <span className="fw-bold text-dark font-monospace">#MMT-{booking.id}</span>
+                  <span className="fw-bold text-dark font-monospace">#GT-{booking.id}</span>
                 </div>
                 <div className="d-flex justify-content-between mb-1">
                   <span className="text-muted small">Booking Status:</span>
@@ -302,7 +302,7 @@ const Payment = () => {
               <span className="fw-bold text-primary text-uppercase">{booking.booking_type}</span>
 
               <span className="small text-muted d-block uppercase fw-bold mt-2" style={{ fontSize: '10px' }}>BOOKING ID</span>
-              <span className="fw-bold text-dark-blue">#MMT-{booking.id}</span>
+              <span className="fw-bold text-dark-blue">#GT-{booking.id}</span>
 
               <span className="small text-muted d-block uppercase fw-bold mt-2" style={{ fontSize: '10px' }}>TRAVELERS</span>
               <span className="fw-bold text-dark-blue">

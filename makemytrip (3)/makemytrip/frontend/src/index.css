@@ -55,14 +55,14 @@ h3,
 }
 
 /* Premium Navbar Styling */
-.navbar-mmt {
+.navbar-gt {
   background-color: #ffffff !important;
   border-bottom: 1px solid var(--border-color);
   padding: 14px 0;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
-.navbar-mmt .nav-link {
+.navbar-gt .nav-link {
   font-weight: 600;
   font-size: 14px;
   color: var(--text-muted) !important;
@@ -71,18 +71,18 @@ h3,
   border-radius: 8px;
 }
 
-.navbar-mmt .nav-link.active {
+.navbar-gt .nav-link.active {
   color: var(--primary-sage) !important;
   background-color: rgba(45, 74, 62, 0.08) !important;
 }
 
-.navbar-mmt .nav-link:hover {
+.navbar-gt .nav-link:hover {
   color: var(--primary-sage) !important;
   background-color: rgba(45, 74, 62, 0.06) !important;
   transform: translateY(-1.5px);
 }
 
-.navbar-mmt .btn-outline-primary:hover {
+.navbar-gt .btn-outline-primary:hover {
   background-color: #e2f8fd !important;
   border-color: #35393b !important;
   color: #000000 !important;
@@ -91,7 +91,7 @@ h3,
 }
 
 /* Hero Section */
-.bg-hero-mmt {
+.bg-hero-gt {
   background: var(--hero-gradient);
   min-height: 320px;
   position: relative;
@@ -188,7 +188,7 @@ h3,
   cursor: pointer;
 }
 
-.btn-search-mmt {
+.btn-search-gt {
   background: linear-gradient(90deg, var(--champagne-gold) 0%, #dcd0bc 100%);
   color: var(--primary-sage);
   border: none;
@@ -205,7 +205,7 @@ h3,
   width: 100%;
 }
 
-.btn-search-mmt:hover {
+.btn-search-gt:hover {
   transform: translateY(-2px);
   box-shadow: 0 15px 35px rgba(197, 168, 128, 0.45);
   color: var(--primary-sage);
@@ -450,13 +450,13 @@ h3,
 @media (min-width: 992px) {
 
   .home-navbar .navbar-collapse,
-  .navbar-mmt .navbar-collapse {
+  .navbar-gt .navbar-collapse {
     display: flex !important;
     justify-content: center !important;
   }
 
   .home-navbar .navbar-nav,
-  .navbar-mmt .navbar-nav {
+  .navbar-gt .navbar-nav {
     background: #f1f5f9 !important;
     /* soft white/grey pill background matching screenshot */
     border: 1px solid rgba(0, 0, 0, 0.06) !important;
@@ -473,7 +473,7 @@ h3,
 
 /* Link items inside the pill - high specificity to override bg-transparent */
 nav.home-navbar .navbar-collapse .navbar-nav .nav-link,
-nav.navbar-mmt .navbar-collapse .navbar-nav .nav-link {
+nav.navbar-gt .navbar-collapse .navbar-nav .nav-link {
   color: #4b5563 !important;
   font-weight: 500;
   font-size: 14.5px;
@@ -485,13 +485,13 @@ nav.navbar-mmt .navbar-collapse .navbar-nav .nav-link {
 }
 
 nav.home-navbar .navbar-collapse .navbar-nav .nav-link:hover,
-nav.navbar-mmt .navbar-collapse .navbar-nav .nav-link:hover {
+nav.navbar-gt .navbar-collapse .navbar-nav .nav-link:hover {
   color: var(--primary-sage) !important;
   background-color: rgba(45, 74, 62, 0.06) !important;
 }
 
 nav.home-navbar .navbar-collapse .navbar-nav .nav-link.active,
-nav.navbar-mmt .navbar-collapse .navbar-nav .nav-link.active {
+nav.navbar-gt .navbar-collapse .navbar-nav .nav-link.active {
   color: var(--primary-sage) !important;
   background-color: rgba(45, 74, 62, 0.12) !important;
   /* luxurious sage active pill */
@@ -499,7 +499,7 @@ nav.navbar-mmt .navbar-collapse .navbar-nav .nav-link.active {
 }
 
 .home-navbar .nav-link::after,
-.navbar-mmt .nav-link::after {
+.navbar-gt .nav-link::after {
   display: none !important;
 }
 
@@ -542,7 +542,7 @@ nav.navbar-mmt .navbar-collapse .navbar-nav .nav-link.active {
 @media (max-width: 991px) {
 
   nav.home-navbar .navbar-collapse .navbar-nav,
-  nav.navbar-mmt .navbar-collapse .navbar-nav {
+  nav.navbar-gt .navbar-collapse .navbar-nav {
     position: static !important;
     transform: none !important;
     left: auto !important;
@@ -555,7 +555,7 @@ nav.navbar-mmt .navbar-collapse .navbar-nav .nav-link.active {
   }
 
   nav.home-navbar .navbar-collapse .navbar-nav .nav-link,
-  nav.navbar-mmt .navbar-collapse .navbar-nav .nav-link {
+  nav.navbar-gt .navbar-collapse .navbar-nav .nav-link {
     margin: 4px 0 !important;
     width: 100%;
     text-align: center;
@@ -701,17 +701,17 @@ body:has(.home-hero) {
 @media (min-width: 992px) {
 
   .home-navbar .container,
-  .navbar-mmt .container {
+  .navbar-gt .container {
     position: relative;
   }
 
   .home-navbar .navbar-collapse,
-  .navbar-mmt .navbar-collapse {
+  .navbar-gt .navbar-collapse {
     justify-content: center;
   }
 
   .home-navbar .navbar-nav,
-  .navbar-mmt .navbar-nav {
+  .navbar-gt .navbar-nav {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);

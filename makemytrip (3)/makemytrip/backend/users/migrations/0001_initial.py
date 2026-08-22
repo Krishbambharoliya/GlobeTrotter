@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('phone_number', models.CharField(blank=True, max_length=20, null=True)),
                 ('avatar_url', models.CharField(blank=True, max_length=500, null=True)),
-                ('tier', models.CharField(default='PYT Member', max_length=30)),
+                ('tier', models.CharField(default='GT Member', max_length=30)),
                 ('loyalty_points', models.IntegerField(default=500)),
                 ('wallet_balance', models.DecimalField(decimal_places=2, default=1000.0, max_digits=10)),
                 ('otp', models.CharField(blank=True, max_length=6, null=True)),

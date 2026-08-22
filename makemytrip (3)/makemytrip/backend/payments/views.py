@@ -99,13 +99,13 @@ class CreateMockPaymentView(APIView):
                 Notification.objects.create(
                     user=request.user,
                     title="💳 Payment Successful & Wallet Deducted",
-                    message=f"₹{int(float(amount)):,} has been deducted from your Wallet balance for Booking #MMT-{booking.id}.",
+                    message=f"₹{int(float(amount)):,} has been deducted from your Wallet balance for Booking #GT-{booking.id}.",
                     notification_type="Push"
                 )
                 Notification.objects.create(
                     user=request.user,
                     title="🎉 Booking Confirmed!",
-                    message=f"Your {booking.booking_type.upper()} booking (#MMT-{booking.id}) has been confirmed successfully! E-ticket is ready in your Dashboard.",
+                    message=f"Your {booking.booking_type.upper()} booking (#GT-{booking.id}) has been confirmed successfully! E-ticket is ready in your Dashboard.",
                     notification_type="Push"
                 )
             except Exception as notify_err:

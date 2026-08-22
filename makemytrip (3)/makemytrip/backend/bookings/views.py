@@ -42,7 +42,7 @@ class BookingCancelView(APIView):
             booking.status = 'cancelled'
             booking.save()
             
-            # Refund logic - if paid, refund back to MMT Wallet
+            # Refund logic - if paid, refund back to GlobeTrotter Wallet
             profile = booking.user.profile
             profile.wallet_balance += booking.total_price
             profile.save()

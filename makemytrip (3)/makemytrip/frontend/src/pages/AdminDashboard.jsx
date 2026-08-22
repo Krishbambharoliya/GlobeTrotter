@@ -1450,7 +1450,7 @@ const AdminDashboard = () => {
                             </td>
                             <td>
                               <span className="badge bg-light text-dark border rounded-pill mb-1 d-inline-block" style={{ fontSize: '10.5px' }}>
-                                👑 {u.profile?.tier || 'PYT Member'}
+                                👑 {u.profile?.tier || 'GT Member'}
                               </span>
                               <div className="small text-muted">📞 {u.profile?.phone_number || 'No Phone'}</div>
                             </td>
@@ -1830,7 +1830,7 @@ const AdminDashboard = () => {
                             <div className="col-md-6">
                               <label className="text-muted small fw-bold text-uppercase mb-1 d-block">System Records</label>
                               <p className="mb-1"><strong>Booking Date:</strong> {new Date(viewItem.booking_date).toLocaleString()}</p>
-                              <p className="mb-0"><strong>Reference:</strong> MMT-B-{viewItem.id}</p>
+                              <p className="mb-0"><strong>Reference:</strong> GT-B-{viewItem.id}</p>
                             </div>
                           </div>
                         </div>
@@ -1871,7 +1871,7 @@ const AdminDashboard = () => {
                                 </div>
                                 <div className="col-6 mt-2">
                                   <span className="text-muted small d-block">Loyalty Membership</span>
-                                  <span className="badge bg-warning text-dark fw-bold" style={{ fontSize: '11px' }}>👑 {viewItem.profile?.tier || "PYT Member"}</span>
+                                  <span className="badge bg-warning text-dark fw-bold" style={{ fontSize: '11px' }}>👑 {viewItem.profile?.tier || "GT Member"}</span>
                                 </div>
                               </div>
 
@@ -1884,7 +1884,7 @@ const AdminDashboard = () => {
                                   <h4 className="fw-bold text-success mb-0">₹{Math.floor(parseFloat(viewItem.profile?.wallet_balance || 0)).toLocaleString('en-IN')}</h4>
                                 </div>
                                 <div className="col-6">
-                                  <span className="text-muted small d-block">MMT Loyalty Coins</span>
+                                  <span className="text-muted small d-block">GlobeTrotter Loyalty Coins</span>
                                   <h4 className="fw-bold text-warning mb-0">🪙 {viewItem.profile?.loyalty_points || 0} Coins</h4>
                                 </div>
                               </div>

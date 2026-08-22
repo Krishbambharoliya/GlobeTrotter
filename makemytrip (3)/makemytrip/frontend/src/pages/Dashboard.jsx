@@ -731,7 +731,7 @@ const Dashboard = () => {
                   <div className="col-md-6">
                     <div className="p-3 rounded-3 border border-light-subtle bg-white">
                       <span className="small text-muted d-block" style={{ fontSize: '11px' }}>Membership Tier</span>
-                      <strong className="text-dark d-block mt-1" style={{ fontSize: '14px' }}>{profile?.profile?.tier || 'PYT Member'}</strong>
+                      <strong className="text-dark d-block mt-1" style={{ fontSize: '14px' }}>{profile?.profile?.tier || 'GT Member'}</strong>
                     </div>
                   </div>
                   <div className="col-md-6">

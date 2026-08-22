@@ -549,7 +549,7 @@ const Home = () => {
       {/* 2. Parallax Sticky Navbar */}
       <nav
         id="navbar"
-        className="navbar navbar-expand-lg navbar-mmt sticky-top home-navbar"
+        className="navbar navbar-expand-lg navbar-gt sticky-top home-navbar"
       >
         <div className="container">
           <Link
@@ -1621,7 +1621,7 @@ const Home = () => {
                 )}
 
                 {/* Search Action Button */}
-                <button onClick={handleSearch} className="btn btn-search-mmt">
+                <button onClick={handleSearch} className="btn btn-search-gt">
                   SEARCH
                 </button>
               </>

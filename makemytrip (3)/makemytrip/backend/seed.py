@@ -502,7 +502,7 @@ def seed_support():
         {'q': 'How do I cancel my flight booking?', 'a': 'You can cancel your booking directly from the dashboard under My Bookings by clicking the Cancel Booking button.', 'cat': 'Flights'},
         {'q': 'Is my hotel booking refundable?', 'a': 'Refund policies vary by hotel. Check the terms before booking or look at your booking status in your profile.', 'cat': 'Hotels'},
         {'q': 'Can I choose my berths in train bookings?', 'a': 'Yes, our interactive coach layout allows you to choose sleeper or AC berths in real-time.', 'cat': 'Trains'},
-        {'q': 'What does the MMT Wallet balance do?', 'a': 'Your MMT Wallet balance holds credits that you can apply during checkout to pay for any booking.', 'cat': 'Payments'},
+        {'q': 'What does the GlobeTrotter Wallet balance do?', 'a': 'Your GlobeTrotter Wallet balance holds credits that you can apply during checkout to pay for any booking.', 'cat': 'Payments'},
     ]
     
     for f in faqs:
