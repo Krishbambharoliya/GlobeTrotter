@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams, Link } from 'react-router-dom';
-import { FaPlane, FaHotel, FaBus, FaSuitcase, FaCar, FaPercentage, FaSignOutAlt, FaStar, FaChevronRight, FaHeart, FaRegHeart, FaWifi, FaSwimmingPool, FaSpa, FaDumbbell, FaUtensils, FaParking, FaConciergeBell, FaGlassMartiniAlt, FaSearch, FaFilter, FaTimes, FaCheck, FaSun, FaMoon } from 'react-icons/fa';
+import { FaPlane, FaHotel, FaBus, FaSuitcase, FaCar, FaPercentage, FaSignOutAlt, FaStar, FaChevronRight, FaHeart, FaRegHeart, FaWifi, FaSwimmingPool, FaSpa, FaDumbbell, FaUtensils, FaParking, FaConciergeBell, FaGlassMartiniAlt, FaSearch, FaFilter, FaTimes, FaCheck, FaSun, FaMoon, FaMapMarkerAlt, FaTrain, FaCrown, FaClock, FaCalendarAlt } from 'react-icons/fa';
 import api from '../api';
 import AuthModal from '../components/AuthModal';
 import poolVideo from '../assets/Pool_Woman.mp4';
 import p1Image from '../assets/p1.png';
+import { useTheme } from '../context/ThemeContext';
 
 // Deterministic helper functions for client-side filters on homepage
 const getHotelAmenities = (hotelId) => {
@@ -267,15 +268,8 @@ const Home = () => {
   const [selectedPkgMinRating, setSelectedPkgMinRating] = useState(0);
   const [pkgSortBy, setPkgSortBy] = useState('price_low');
 
-  // Theme state
-  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'light');
-
-  const toggleTheme = () => {
-    const nextTheme = theme === 'light' ? 'dark' : 'light';
-    setTheme(nextTheme);
-    document.documentElement.setAttribute('data-theme', nextTheme);
-    localStorage.setItem('theme', nextTheme);
-  };
+  // Theme state from Context
+  const { theme, toggleTheme } = useTheme();
 
   // Extra states for homepage limit pagination & debouncing
   const [homeHotelLimit, setHomeHotelLimit] = useState(6);
@@ -543,15 +537,13 @@ const Home = () => {
         </video>
         <div className="home-hero-text d-flex flex-column align-items-center justify-content-center text-center gap-3 px-3" style={{ textShadow: '0 2px 10px rgba(0, 0, 0, 0.8)' }}>
           <div className="d-flex align-items-center justify-content-center flex-wrap gap-2">
-            <span style={{ fontFamily: "'Limelight', cursive" }}>Your therapist was right, you need to</span>
             <div className="d-inline-flex align-items-center" style={{ verticalAlign: 'middle', textShadow: 'none' }}>
-              <span style={{ fontSize: '1.0em', letterSpacing: '-1.5px', fontWeight: '800', color: '#ffffff', fontFamily: "'Limelight', cursive" }}>plan</span>
-              <span style={{ fontSize: '0.65em', fontWeight: '800', backgroundColor: '#ff3838', color: '#ffffff', padding: '2px 8px', borderRadius: '6px', fontFamily: "'Limelight', cursive", margin: '0 6px', textTransform: 'lowercase', display: 'inline-block', lineHeight: '1.2' }}>your</span>
-              <span style={{ fontSize: '1.0em', letterSpacing: '-1.5px', fontWeight: '800', color: '#ffffff', fontFamily: "'Limelight', cursive" }}>trip</span>
+              <span style={{ fontSize: '3.2em', letterSpacing: '-2px', fontWeight: '800', color: '#ffffff', fontFamily: "'Poppins', sans-serif" }}>Globe</span>
+              <span style={{ fontSize: '3.2em', letterSpacing: '-2px', fontWeight: '800', color: '#ff3838', fontFamily: "'Poppins', sans-serif", marginLeft: '4px' }}>Trotter</span>
             </div>
           </div>
-          <p style={{ fontSize: '20px', fontWeight: '500', color: 'rgba(255, 255, 255, 0.75)', fontFamily: "'Poppins', sans-serif", letterSpacing: '0.5px', margin: '0' }}>
-            Leave your boss on read, pack your bags, and dive in. 🌴🎒
+          <p style={{ fontSize: '22px', fontWeight: '500', color: 'rgba(255, 255, 255, 0.9)', fontFamily: "'Poppins', sans-serif", letterSpacing: '0.5px', margin: '0' }}>
+            Empowering Personalized Travel Planning across India & Worldwide 🌴🎒
           </p>
           <button
             onClick={() => {
@@ -707,7 +699,7 @@ const Home = () => {
           </div>
 
           <div className="collapse navbar-collapse justify-content-between" id="navbarHomeText">
-            <ul className="navbar-nav mx-auto mb-2 mb-lg-0 gap-1 flex-wrap">
+            <ul className="navbar-nav mx-auto mb-2 mb-lg-0 gap-1 d-flex flex-nowrap align-items-center">
               <li className="nav-item">
                 <button
                   className="nav-link px-3 py-1.5 fw-semibold border-0 bg-transparent active"
@@ -730,6 +722,22 @@ const Home = () => {
                 >
                   Explore
                 </button>
+              </li>
+              <li className="nav-item">
+                <Link
+                  to="/trips"
+                  className="nav-link px-3 py-1.5 fw-semibold text-decoration-none text-muted"
+                >
+                  Plan Trips
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                  to="/trips"
+                  className="nav-link px-3 py-1.5 fw-semibold text-decoration-none text-muted"
+                >
+                  Community
+                </Link>
               </li>
               <li className="nav-item">
                 <button
@@ -773,9 +781,8 @@ const Home = () => {
               <h1 className="travel-banner-title mb-2 text-white d-flex align-items-center justify-content-center flex-wrap gap-2">
                 <span style={{ fontFamily: "'Poppins', sans-serif" }}>Explore India with</span>
                 <div className="d-inline-flex align-items-center" style={{ verticalAlign: 'middle', textShadow: 'none' }}>
-                  <span style={{ fontSize: '1.0em', letterSpacing: '-1.5px', fontWeight: '800', color: '#ffffff', fontFamily: "'Poppins', sans-serif" }}>plan</span>
-                  <span style={{ fontSize: '0.65em', fontWeight: '800', backgroundColor: '#ff3838', color: '#ffffff', padding: '2px 8px', borderRadius: '6px', fontFamily: "'Poppins', sans-serif", margin: '0 6px', textTransform: 'lowercase', display: 'inline-block', lineHeight: '1.2' }}>your</span>
-                  <span style={{ fontSize: '1.0em', letterSpacing: '-1.5px', fontWeight: '800', color: '#ffffff', fontFamily: "'Poppins', sans-serif" }}>trip</span>
+                  <span style={{ fontSize: '1.0em', letterSpacing: '-1.5px', fontWeight: '800', color: '#ffffff', fontFamily: "'Poppins', sans-serif" }}>Globe</span>
+                  <span style={{ fontSize: '1.0em', letterSpacing: '-1.5px', fontWeight: '800', color: '#ff3838', fontFamily: "'Poppins', sans-serif" }}>Trotter</span>
                 </div>
               </h1>
               <p className="travel-banner-subtitle text-white-50 mb-0">Find the best deals on flights, hotels, and more for your next adventure.</p>
@@ -1494,36 +1501,39 @@ const Home = () => {
 
                     <div className="search-fields-grid">
                       <div className="search-field-box">
-                        <label>From</label>
+                        <label className="text-uppercase"><FaMapMarkerAlt className="text-primary me-1.5" /> From</label>
                         <input
                           type="text"
                           value={fromCity}
                           onChange={(e) => setFromCity(e.target.value)}
                           placeholder="e.g. New Delhi"
                           className="w-100 fw-bold border-0 bg-transparent"
-                          style={{ outline: 'none', fontSize: '16px', color: 'var(--text-dark)' }}
+                          style={{ outline: 'none', fontSize: '17px' }}
                         />
                         <span className="small text-muted d-block mt-1">Departure City</span>
                       </div>
+
                       <div className="search-field-box">
-                        <label>To</label>
+                        <label className="text-uppercase"><FaMapMarkerAlt className="text-danger me-1.5" /> To</label>
                         <input
                           type="text"
                           value={toCity}
                           onChange={(e) => setToCity(e.target.value)}
                           placeholder="e.g. Mumbai"
                           className="w-100 fw-bold border-0 bg-transparent"
-                          style={{ outline: 'none', fontSize: '16px', color: 'var(--text-dark)' }}
+                          style={{ outline: 'none', fontSize: '17px' }}
                         />
                         <span className="small text-muted d-block mt-1">Arrival City</span>
                       </div>
+
                       <div className="search-field-box">
-                        <label>Departure Date</label>
+                        <label className="text-uppercase"><FaCalendarAlt className="text-info me-1.5" /> Departure Date</label>
                         <input type="date" value={depDate} onChange={(e) => setDepDate(e.target.value)} min={new Date().toISOString().split('T')[0]} />
                         <span className="small text-muted d-block mt-1">Choose Date</span>
                       </div>
+
                       <div className="search-field-box">
-                        <label>Class</label>
+                        <label className="text-uppercase"><FaCrown className="text-warning me-1.5" /> Class</label>
                         <select value={flightClass} onChange={(e) => setFlightClass(e.target.value)}>
                           <option value="Economy">Economy</option>
                           <option value="Premium Economy">Premium Economy</option>
@@ -1539,32 +1549,35 @@ const Home = () => {
                 {activeTab === 'trains' && (
                   <div className="search-fields-grid">
                     <div className="search-field-box">
-                      <label>From</label>
+                      <label className="text-uppercase"><FaTrain className="text-success me-1.5" /> From</label>
                       <input
                         type="text"
                         value={trainFrom}
                         onChange={(e) => setTrainFrom(e.target.value)}
                         placeholder="e.g. New Delhi"
                         className="w-100 fw-bold border-0 bg-transparent"
-                        style={{ outline: 'none', fontSize: '16px', color: 'var(--text-dark)' }}
+                        style={{ outline: 'none', fontSize: '17px' }}
                       />
-                      <span className="small text-muted d-block mt-1">Origin City</span>
+                      <span className="small text-muted d-block mt-1">Origin City / Station</span>
                     </div>
+
                     <div className="search-field-box">
-                      <label>To</label>
+                      <label className="text-uppercase"><FaMapMarkerAlt className="text-danger me-1.5" /> To</label>
                       <input
                         type="text"
                         value={trainTo}
                         onChange={(e) => setTrainTo(e.target.value)}
                         placeholder="e.g. Goa"
                         className="w-100 fw-bold border-0 bg-transparent"
-                        style={{ outline: 'none', fontSize: '16px', color: 'var(--text-dark)' }}
+                        style={{ outline: 'none', fontSize: '17px' }}
                       />
-                      <span className="small text-muted d-block mt-1">Destination City</span>
+                      <span className="small text-muted d-block mt-1">Destination City / Station</span>
                     </div>
-                    <div className="search-field-box" style={{ gridColumn: 'span 2' }}>
-                      <label>Travel Date</label>
+
+                    <div className="search-field-box">
+                      <label className="text-uppercase"><FaCalendarAlt className="text-info me-1.5" /> Travel Date</label>
                       <input type="date" value={trainDate} onChange={(e) => setTrainDate(e.target.value)} min={new Date().toISOString().split('T')[0]} />
+                      <span className="small text-muted d-block mt-1">Select Journey Date</span>
                     </div>
                   </div>
                 )}
@@ -1573,33 +1586,35 @@ const Home = () => {
                 {activeTab === 'buses' && (
                   <div className="search-fields-grid">
                     <div className="search-field-box">
-                      <label>From</label>
+                      <label className="text-uppercase"><FaBus className="text-warning me-1.5" /> From</label>
                       <input
                         type="text"
                         value={busFrom}
                         onChange={(e) => setBusFrom(e.target.value)}
                         placeholder="e.g. New Delhi"
                         className="w-100 fw-bold border-0 bg-transparent"
-                        style={{ outline: 'none', fontSize: '16px', color: 'var(--text-dark)' }}
+                        style={{ outline: 'none', fontSize: '17px' }}
                       />
                       <span className="small text-muted d-block mt-1">Origin City</span>
                     </div>
+
                     <div className="search-field-box">
-                      <label>To</label>
+                      <label className="text-uppercase"><FaMapMarkerAlt className="text-danger me-1.5" /> To</label>
                       <input
                         type="text"
                         value={busTo}
                         onChange={(e) => setBusTo(e.target.value)}
                         placeholder="e.g. Mumbai"
                         className="w-100 fw-bold border-0 bg-transparent"
-                        style={{ outline: 'none', fontSize: '16px', color: 'var(--text-dark)' }}
+                        style={{ outline: 'none', fontSize: '17px' }}
                       />
                       <span className="small text-muted d-block mt-1">Destination City</span>
                     </div>
-                    <div className="search-field-box" style={{ gridColumn: 'span 2' }}>
-                      <label>Travel Date</label>
+
+                    <div className="search-field-box">
+                      <label className="text-uppercase"><FaCalendarAlt className="text-info me-1.5" /> Travel Date</label>
                       <input type="date" value={busDate} onChange={(e) => setBusDate(e.target.value)} min={new Date().toISOString().split('T')[0]} />
-                      <span className="small text-muted d-block mt-1">Choose Date</span>
+                      <span className="small text-muted d-block mt-1">Choose Journey Date</span>
                     </div>
                   </div>
                 )}
@@ -1607,16 +1622,15 @@ const Home = () => {
                 {/* Cars Widget */}
                 {activeTab === 'cars' && (
                   <div className="search-fields-grid">
-                    {/* Box 1: Location & Mode */}
                     <div className="search-field-box">
-                      <label>Rental Details</label>
+                      <label className="text-uppercase"><FaCar className="text-primary me-1.5" /> Rental City</label>
                       <input
                         type="text"
                         value={carCity}
                         onChange={(e) => setCarCity(e.target.value)}
                         placeholder="e.g. New Delhi"
                         className="w-100 fw-bold border-0 bg-transparent mb-1"
-                        style={{ outline: 'none', fontSize: '18px', color: 'var(--text-dark)' }}
+                        style={{ outline: 'none', fontSize: '17px' }}
                       />
                       <select
                         value={carRentalType}
@@ -1627,19 +1641,18 @@ const Home = () => {
                         <option value="Self Drive">Self Drive (No Driver)</option>
                         <option value="With Driver">Chauffeur Driven (With Driver)</option>
                       </select>
-                      <span className="small text-muted d-block mt-2">Location & Drive Style</span>
+                      <span className="small text-muted d-block mt-1">Location & Rental Option</span>
                     </div>
 
-                    {/* Box 2: Pick-up Slot */}
                     <div className="search-field-box">
-                      <label>Pick-up Slot</label>
+                      <label className="text-uppercase"><FaClock className="text-success me-1.5" /> Pick-up Slot</label>
                       <input
                         type="date"
                         value={carDate}
                         onChange={(e) => setCarDate(e.target.value)}
                         min={new Date().toISOString().split('T')[0]}
                         className="w-100 fw-bold border-0 bg-transparent mb-1"
-                        style={{ outline: 'none', fontSize: '18px', color: 'var(--text-dark)' }}
+                        style={{ outline: 'none', fontSize: '16px' }}
                       />
                       <input
                         type="time"
@@ -1648,19 +1661,18 @@ const Home = () => {
                         className="w-100 border-0 bg-transparent text-muted mt-1 fw-semibold"
                         style={{ outline: 'none', fontSize: '14px', cursor: 'pointer' }}
                       />
-                      <span className="small text-muted d-block mt-2">Pick up Date & Time</span>
+                      <span className="small text-muted d-block mt-1">Pick up Date & Time</span>
                     </div>
 
-                    {/* Box 3: Drop-off Slot */}
                     <div className="search-field-box">
-                      <label>Drop-off Slot</label>
+                      <label className="text-uppercase"><FaClock className="text-danger me-1.5" /> Drop-off Slot</label>
                       <input
                         type="date"
                         value={carDropDate}
                         onChange={(e) => setCarDropDate(e.target.value)}
                         min={carDate}
                         className="w-100 fw-bold border-0 bg-transparent mb-1"
-                        style={{ outline: 'none', fontSize: '18px', color: 'var(--text-dark)' }}
+                        style={{ outline: 'none', fontSize: '16px' }}
                       />
                       <input
                         type="time"
@@ -1669,15 +1681,17 @@ const Home = () => {
                         className="w-100 border-0 bg-transparent text-muted mt-1 fw-semibold"
                         style={{ outline: 'none', fontSize: '14px', cursor: 'pointer' }}
                       />
-                      <span className="small text-muted d-block mt-2">Drop off Date & Time</span>
+                      <span className="small text-muted d-block mt-1">Drop off Date & Time</span>
                     </div>
                   </div>
                 )}
 
                 {/* Search Action Button */}
-                <button onClick={handleSearch} className="btn btn-search-gt">
-                  SEARCH
-                </button>
+                <div className="text-center mt-3">
+                  <button onClick={handleSearch} className="btn btn-search-gt px-5 py-3 shadow-lg">
+                    <FaSearch size={16} /> SEARCH NOW
+                  </button>
+                </div>
               </>
             )}
           </div>

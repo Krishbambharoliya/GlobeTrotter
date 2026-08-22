@@ -1,9 +1,13 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { ThemeProvider } from './context/ThemeContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
+import Login from './pages/Login';
+import Register from './pages/Register';
 import SearchResults from './pages/SearchResults';
+import ActivitySearch from './pages/ActivitySearch';
 import BookingDetails from './pages/BookingDetails';
 import Payment from './pages/Payment';
 import Dashboard from './pages/Dashboard';
@@ -19,8 +23,8 @@ import CreateTrip from './pages/CreateTrip';
 import ItineraryBuilder from './pages/ItineraryBuilder';
 import ItineraryView from './pages/ItineraryView';
 import SharedItineraryView from './pages/SharedItineraryView';
-
-import { FaSun, FaMoon } from 'react-icons/fa';
+import Community from './pages/Community';
+import CalendarView from './pages/CalendarView';
 
 function ScrollToNavbar() {
   const location = useLocation();
@@ -46,7 +50,6 @@ function ScrollToNavbar() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
-    // Fire immediately and after a short delay to handle async page renders
     doScroll();
     const t = setTimeout(doScroll, 150);
     return () => clearTimeout(t);
@@ -55,47 +58,59 @@ function ScrollToNavbar() {
   return null;
 }
 
-function App() {
-  useEffect(() => {
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    document.documentElement.setAttribute('data-theme', savedTheme);
-    document.body.setAttribute('data-theme', savedTheme);
-  }, []);
+function AppShell() {
+  const location = useLocation();
+  const isAuthPage = ['/login', '/register'].includes(location.pathname);
+  const isHomeMarketing = location.pathname === '/';
 
   return (
-    <Router>
-      <ScrollToNavbar />
-      <div className="d-flex flex-column min-vh-100 bg-light">
-        <Navbar />
-        <main className="flex-grow-1">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/flights" element={<SearchResults type="flights" />} />
-            <Route path="/hotels" element={<SearchResults type="hotels" />} />
-            <Route path="/trains" element={<SearchResults type="trains" />} />
-            <Route path="/buses" element={<SearchResults type="buses" />} />
-            <Route path="/packages" element={<SearchResults type="packages" />} />
-            <Route path="/cars" element={<SearchResults type="cars" />} />
-            <Route path="/booking-details" element={<BookingDetails />} />
-            <Route path="/payment" element={<Payment />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/admin-dashboard" element={<AdminDashboard />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/terms" element={<Terms />} />
-            <Route path="/privacy" element={<Privacy />} />
-            <Route path="/trips" element={<TripList />} />
-            <Route path="/trips/new" element={<CreateTrip />} />
-            <Route path="/trips/:id" element={<ItineraryView />} />
-            <Route path="/trips/:id/edit" element={<ItineraryBuilder />} />
-            <Route path="/trips/shared/:id" element={<SharedItineraryView />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
-    </Router>
+    <div className={`d-flex flex-column min-vh-100 ${isAuthPage ? 'auth-shell' : 'bg-light'}`}>
+      <a className="skip-link" href="#main-content">Skip to main content</a>
+      {!isAuthPage && !isHomeMarketing && <Navbar />}
+      <main id="main-content" className="flex-grow-1" tabIndex="-1">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/search" element={<ActivitySearch />} />
+          <Route path="/community" element={<Community />} />
+          <Route path="/calendar" element={<CalendarView />} />
+          <Route path="/flights" element={<SearchResults type="flights" />} />
+          <Route path="/hotels" element={<SearchResults type="hotels" />} />
+          <Route path="/trains" element={<SearchResults type="trains" />} />
+          <Route path="/buses" element={<SearchResults type="buses" />} />
+          <Route path="/packages" element={<SearchResults type="packages" />} />
+          <Route path="/cars" element={<SearchResults type="cars" />} />
+          <Route path="/booking-details" element={<BookingDetails />} />
+          <Route path="/payment" element={<Payment />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/admin-dashboard" element={<AdminDashboard />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/trips" element={<TripList />} />
+          <Route path="/trips/new" element={<CreateTrip />} />
+          <Route path="/trips/:id" element={<ItineraryView />} />
+          <Route path="/trips/:id/edit" element={<ItineraryBuilder />} />
+          <Route path="/trips/shared/:id" element={<SharedItineraryView />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </main>
+      {!isAuthPage && <Footer />}
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <ThemeProvider>
+      <Router>
+        <ScrollToNavbar />
+        <AppShell />
+      </Router>
+    </ThemeProvider>
   );
 }
 

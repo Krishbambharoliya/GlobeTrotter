@@ -2,6 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import api from '../api';
 import { FaChevronLeft, FaCalendarAlt, FaDollarSign, FaCopy, FaShareAlt, FaGlobe, FaEdit, FaChevronDown, FaChevronUp } from 'react-icons/fa';
+import { mockTrips, mockItineraryDays } from '../data/mockData';
+
+const getPhysicalLevel = (act) => {
+  const hours = parseFloat(act.duration_hours) || 1;
+  if (hours >= 4) return 'Heavy';
+  if (hours >= 2) return 'Moderate';
+  return 'Light';
+};
 
 const ItineraryView = () => {
   const { id } = useParams();
@@ -23,7 +31,27 @@ const ItineraryView = () => {
       setTrip(res.data);
     } catch (err) {
       console.error(err);
-      setError('Failed to load itinerary. Please ensure you are logged in.');
+      const mock = mockTrips.find((t) => String(t.id) === String(id));
+      if (mock) {
+        setTrip({
+          ...mock,
+          stops: mockItineraryDays.map((d, i) => ({
+            city_name: mock.stops?.[0]?.city_name || 'Paris',
+            country_name: mock.stops?.[0]?.country_name || 'France',
+            date: d.date,
+            activities: d.activities.map((a, j) => ({
+              name: a.name,
+              category: 'Sightseeing',
+              cost: a.expense,
+              duration_hours: a.physical === 'Heavy' ? 4 : a.physical === 'Moderate' ? 2 : 1,
+              start_time: `${9 + j * 2}:00 AM`,
+              physical: a.physical,
+            })),
+          })),
+        });
+      } else {
+        setError('Failed to load itinerary. Showing demo unavailable.');
+      }
     } finally {
       setLoading(false);
     }
@@ -201,7 +229,7 @@ const ItineraryView = () => {
                     {stop.activities?.map((act, aIdx) => (
                       <div className="small text-muted border-top pt-1 mt-1 d-flex justify-content-between" key={aIdx}>
                         <span>• {act.name} ({act.start_time})</span>
-                        <span className="fw-semibold text-dark">${(parseFloat(act.cost) || 0).toFixed(2)}</span>
+                        <span className="fw-semibold text-dark">₹{(parseFloat(act.cost) || 0).toLocaleString('en-IN')}</span>
                       </div>
                     ))}
                   </div>
@@ -241,22 +269,33 @@ const ItineraryView = () => {
                         {stop.activities?.length === 0 ? (
                           <p className="text-muted small mb-0">No activities scheduled for this stop.</p>
                         ) : (
-                          <div className="timeline-activity-list d-flex flex-column gap-3">
-                            {stop.activities.map((act, actIdx) => (
-                              <div className="d-flex gap-3 position-relative pb-2 border-left" key={actIdx}>
-                                <div className="timeline-bullet rounded-circle bg-primary mt-1.5" style={{ width: '10px', height: '10px', flexShrink: 0 }}></div>
-                                <div className="flex-grow-1">
-                                  <div className="d-flex justify-content-between align-items-start">
-                                    <div>
-                                      <h6 className="fw-bold mb-0.5 text-dark-blue">{act.name}</h6>
-                                      <span className="badge bg-light text-muted small me-2">{act.category}</span>
-                                      <span className="text-muted small">{act.start_time} | {act.duration_hours}h</span>
-                                    </div>
-                                    <span className="fw-bold text-primary-blue small">${(parseFloat(act.cost) || 0).toFixed(2)}</span>
-                                  </div>
-                                </div>
-                              </div>
-                            ))}
+                          <div className="table-responsive">
+                            <table className="table table-sm itinerary-table mb-0">
+                              <thead>
+                                <tr>
+                                  <th>Activity</th>
+                                  <th>Physical Activity</th>
+                                  <th className="text-end">Expense</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {stop.activities.map((act, actIdx) => (
+                                  <tr key={actIdx}>
+                                    <td>
+                                      <strong>{act.name}</strong>
+                                      <br />
+                                      <small className="text-muted">{act.start_time} · {act.duration_hours}h · {act.category}</small>
+                                    </td>
+                                    <td>
+                                      <span className={`badge ${getPhysicalLevel(act) === 'Heavy' ? 'bg-danger' : getPhysicalLevel(act) === 'Moderate' ? 'bg-warning text-dark' : 'bg-success'}`}>
+                                        {act.physical || getPhysicalLevel(act)}
+                                      </span>
+                                    </td>
+                                    <td className="text-end fw-bold">₹{(parseFloat(act.cost) || 0).toLocaleString('en-IN')}</td>
+                                  </tr>
+                                ))}
+                              </tbody>
+                            </table>
                           </div>
                         )}
                       </div>
@@ -280,12 +319,12 @@ const ItineraryView = () => {
               <div className="row g-3 text-center">
                 <div className="col-6 border-end">
                   <span className="text-muted small block">Total Cost</span>
-                  <h3 className="fw-bold text-primary-blue mt-1 mb-0">${totalCost.toFixed(2)}</h3>
+                  <h3 className="fw-bold text-primary-blue mt-1 mb-0">₹{totalCost.toLocaleString('en-IN')}</h3>
                 </div>
                 <div className="col-6">
                   <span className="text-muted small block">Average / Stop</span>
                   <h3 className="fw-bold text-dark-blue mt-1 mb-0">
-                    ${(totalDays > 0 ? totalCost / totalDays : 0).toFixed(0)}
+                    ₹{(totalDays > 0 ? totalCost / totalDays : 0).toLocaleString('en-IN')}
                   </h3>
                 </div>
               </div>
@@ -296,7 +335,7 @@ const ItineraryView = () => {
               <div className="card border-0 shadow-sm rounded-4 bg-white p-4">
                 <h6 className="fw-bold text-dark-blue mb-2.5">Budget Allocation</h6>
                 <div className="d-flex justify-content-between align-items-center mb-1.5">
-                  <span className="text-muted small">Target Budget: ${budgetLimit.toFixed(2)}</span>
+                  <span className="text-muted small">Target Budget: ₹{budgetLimit.toLocaleString('en-IN')}</span>
                   <span className={`fw-bold small ${isOverBudget ? 'text-danger' : 'text-success'}`}>
                     {Math.round((totalCost / budgetLimit) * 100)}%
                   </span>
@@ -310,11 +349,11 @@ const ItineraryView = () => {
                 </div>
                 {isOverBudget ? (
                   <div className="d-flex align-items-center gap-1.5 text-danger small">
-                    <span className="small">⚠️ Warning: You are over budget by ${(totalCost - budgetLimit).toFixed(2)}!</span>
+                    <span className="small">⚠️ Warning: You are over budget by ₹{(totalCost - budgetLimit).toLocaleString('en-IN')}!</span>
                   </div>
                 ) : (
                   <div className="d-flex align-items-center gap-1.5 text-success small">
-                    <span className="small">Within budget! You have ${(budgetLimit - totalCost).toFixed(2)} remaining.</span>
+                    <span className="small">Within budget! You have ₹{(budgetLimit - totalCost).toLocaleString('en-IN')} remaining.</span>
                   </div>
                 )}
               </div>
@@ -331,7 +370,7 @@ const ItineraryView = () => {
                     <div key={cat}>
                       <div className="d-flex justify-content-between align-items-center mb-1">
                         <span className="small fw-semibold text-dark-blue">{cat}</span>
-                        <span className="small text-muted">${val.toFixed(2)} ({pct}%)</span>
+                        <span className="small text-muted">₹{val.toLocaleString('en-IN')} ({pct}%)</span>
                       </div>
                       <div className="progress" style={{ height: '5px' }}>
                         <div 

@@ -118,3 +118,24 @@ class AIWeatherSuggestionView(APIView):
             "city": city,
             "weather": random.choice(weather_states)
         })
+
+class PythonTranslateView(APIView):
+    permission_classes = (permissions.AllowAny,)
+
+    def post(self, request):
+        text = request.data.get('text', '')
+        target_lang = request.data.get('target_lang', 'en')
+
+        if not text:
+            return Response({'translated': '', 'target_lang': target_lang})
+
+        try:
+            from deep_translator import GoogleTranslator
+            translated = GoogleTranslator(source='auto', target=target_lang).translate(text)
+            return Response({
+                'original': text,
+                'translated': translated,
+                'target_lang': target_lang
+            })
+        except Exception as e:
+            return Response({'translated': text, 'target_lang': target_lang, 'error': str(e)})

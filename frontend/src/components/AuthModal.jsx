@@ -33,6 +33,9 @@ const AuthModal = ({ isOpen, onClose, onSuccess }) => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  const [city, setCity] = useState('');
+  const [country, setCountry] = useState('');
+  const [additionalInfo, setAdditionalInfo] = useState('');
 
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
@@ -50,6 +53,9 @@ const AuthModal = ({ isOpen, onClose, onSuccess }) => {
       setPhoneNumber('');
       setFirstName('');
       setLastName('');
+      setCity('');
+      setCountry('');
+      setAdditionalInfo('');
     } else {
       document.body.style.overflow = 'unset';
     }
@@ -211,6 +217,40 @@ const AuthModal = ({ isOpen, onClose, onSuccess }) => {
                           placeholder="Last Name"
                         />
                       </div>
+                    </div>
+
+                    <div className="row g-2 mb-2">
+                      <div className="col-6">
+                        <label className="form-label small fw-bold">City</label>
+                        <input
+                          type="text"
+                          className="form-control rounded-3"
+                          value={city}
+                          onChange={(e) => setCity(e.target.value)}
+                          placeholder="City"
+                        />
+                      </div>
+                      <div className="col-6">
+                        <label className="form-label small fw-bold">Country</label>
+                        <input
+                          type="text"
+                          className="form-control rounded-3"
+                          value={country}
+                          onChange={(e) => setCountry(e.target.value)}
+                          placeholder="Country"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="mb-2">
+                      <label className="form-label small fw-bold">Additional Information</label>
+                      <textarea
+                        className="form-control rounded-3"
+                        rows={2}
+                        value={additionalInfo}
+                        onChange={(e) => setAdditionalInfo(e.target.value)}
+                        placeholder="Travel preferences, dietary rules, etc."
+                      />
                     </div>
 
                     <div className="mb-4">

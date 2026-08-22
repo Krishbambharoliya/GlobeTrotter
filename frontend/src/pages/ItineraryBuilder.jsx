@@ -121,6 +121,26 @@ const ItineraryBuilder = () => {
 
   const [draggedStopIndex, setDraggedStopIndex] = useState(null);
 
+  const [sections, setSections] = useState([
+    { id: 1, title: 'Section 1', description: '', startDate: '', endDate: '', budget: '' },
+  ]);
+
+  const addSection = () => {
+    setSections([
+      ...sections,
+      { id: Date.now(), title: `Section ${sections.length + 1}`, description: '', startDate: trip?.start_date || '', endDate: trip?.end_date || '', budget: '' },
+    ]);
+  };
+
+  const updateSection = (id, field, value) => {
+    setSections(sections.map((s) => (s.id === id ? { ...s, [field]: value } : s)));
+  };
+
+  const removeSection = (id) => {
+    if (sections.length <= 1) return;
+    setSections(sections.filter((s) => s.id !== id));
+  };
+
   const handleDragStart = (e, index) => {
     setDraggedStopIndex(index);
     e.dataTransfer.effectAllowed = "move";
@@ -243,6 +263,58 @@ const ItineraryBuilder = () => {
           </div>
         </div>
       )}
+
+      {/* Itinerary Sections */}
+      <div className="mb-4">
+        <h5 className="fw-bold text-dark-blue mb-3">Build Itinerary — Sections</h5>
+        <div className="d-flex flex-column gap-3">
+          {sections.map((section) => (
+            <div key={section.id} className="card border-0 shadow-sm rounded-4 p-4 dash-card">
+              <div className="d-flex justify-content-between align-items-center mb-3">
+                <input
+                  type="text"
+                  className="form-control form-control-sm fw-bold border-0 bg-transparent p-0"
+                  style={{ maxWidth: '200px', fontSize: '1.1rem' }}
+                  value={section.title}
+                  onChange={(e) => updateSection(section.id, 'title', e.target.value)}
+                />
+                {sections.length > 1 && (
+                  <button type="button" className="btn btn-sm btn-outline-danger rounded-pill" onClick={() => removeSection(section.id)}>
+                    Remove
+                  </button>
+                )}
+              </div>
+              <div className="mb-3">
+                <label className="form-label small fw-bold">Description</label>
+                <textarea
+                  className="form-control"
+                  rows={2}
+                  placeholder="What will you do in this section?"
+                  value={section.description}
+                  onChange={(e) => updateSection(section.id, 'description', e.target.value)}
+                />
+              </div>
+              <div className="row g-3">
+                <div className="col-md-4">
+                  <label className="form-label small fw-bold">Start Date</label>
+                  <input type="date" className="form-control" value={section.startDate || trip?.start_date || ''} onChange={(e) => updateSection(section.id, 'startDate', e.target.value)} />
+                </div>
+                <div className="col-md-4">
+                  <label className="form-label small fw-bold">End Date</label>
+                  <input type="date" className="form-control" value={section.endDate || trip?.end_date || ''} onChange={(e) => updateSection(section.id, 'endDate', e.target.value)} />
+                </div>
+                <div className="col-md-4">
+                  <label className="form-label small fw-bold">Section Budget ($)</label>
+                  <input type="number" className="form-control" placeholder="0.00" value={section.budget} onChange={(e) => updateSection(section.id, 'budget', e.target.value)} />
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        <button type="button" className="btn btn-outline-primary rounded-pill mt-3 fw-bold d-flex align-items-center gap-2" onClick={addSection}>
+          <FaPlusCircle size={14} /> Add another Section
+        </button>
+      </div>
 
       {/* Destination Search Bar */}
       <div className="card border-0 shadow-sm rounded-4 p-4 mb-4 bg-white position-relative">

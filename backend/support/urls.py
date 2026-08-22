@@ -6,7 +6,8 @@ from .views import (
     ContactMessageDestroyView,
     AIChatbotView,
     AITripPlannerView,
-    AIWeatherSuggestionView
+    AIWeatherSuggestionView,
+    PythonTranslateView
 )
 
 urlpatterns = [
@@ -17,4 +18,5 @@ urlpatterns = [
     path('ai/chat/', AIChatbotView.as_view(), name='ai_chat'),
     path('ai/plan/', AITripPlannerView.as_view(), name='ai_plan'),
     path('ai/weather/', AIWeatherSuggestionView.as_view(), name='ai_weather'),
+    path('translate/', PythonTranslateView.as_view(), name='python_translate'),
 ]

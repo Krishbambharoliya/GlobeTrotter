@@ -3,27 +3,16 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { FaPlane, FaHotel, FaBus, FaSuitcase, FaCar, FaBrain, FaSignOutAlt, FaSun, FaMoon } from 'react-icons/fa';
 import AuthModal from './AuthModal';
 import LanguageSelector from './LanguageSelector';
+import { useTheme } from '../context/ThemeContext';
 
 const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { theme, toggleTheme } = useTheme();
   const [isAuthOpen, setIsAuthOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [firstName, setFirstName] = useState('');
   const [isAdmin, setIsAdmin] = useState(false);
-
-  const [theme, setTheme] = useState(() => {
-    return localStorage.getItem('theme') || 'light';
-  });
-
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
-  }, [theme]);
-
-  const toggleTheme = () => {
-    setTheme(prev => (prev === 'light' ? 'dark' : 'light'));
-  };
 
   const checkAuth = () => {
     const token = localStorage.getItem('access_token');
@@ -102,22 +91,6 @@ const Navbar = () => {
           </Link>
 
           <div className="d-flex align-items-center gap-2 order-lg-last">
-            {/* Dark / Light Mode Toggle Button */}
-            <button
-              onClick={toggleTheme}
-              className="btn btn-sm rounded-circle d-flex align-items-center justify-content-center p-2 border shadow-sm"
-              title={theme === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'}
-              style={{
-                width: '38px',
-                height: '38px',
-                backgroundColor: theme === 'light' ? '#f1f5f9' : '#334155',
-                color: theme === 'light' ? '#0f172a' : '#f8fafc',
-                cursor: 'pointer'
-              }}
-            >
-              {theme === 'light' ? <FaMoon size={16} /> : <FaSun size={16} />}
-            </button>
-
             {isLoggedIn ? (
               <>
                 <Link
@@ -199,13 +172,13 @@ const Navbar = () => {
             {/* Theme Toggle Button */}
             <button
               onClick={toggleTheme}
-              className="d-flex align-items-center justify-content-center border-0 ms-1 p-2 rounded-circle"
+              className="d-flex align-items-center justify-content-center border-0 ms-1 p-2 rounded-circle shadow-sm"
               title={theme === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'}
               style={{
                 width: '38px',
                 height: '38px',
-                backgroundColor: theme === 'light' ? 'rgba(0, 0, 0, 0.05)' : 'rgba(255, 255, 255, 0.1)',
-                color: theme === 'light' ? '#333' : '#ffc107',
+                backgroundColor: theme === 'light' ? '#f1f5f9' : '#334155',
+                color: theme === 'light' ? '#0f172a' : '#f8fafc',
                 cursor: 'pointer',
                 transition: 'all 0.3s ease'
               }}
@@ -219,10 +192,10 @@ const Navbar = () => {
           </div>
 
           <div className="collapse navbar-collapse justify-content-between" id="navbarText">
-            <ul className="navbar-nav mx-auto mb-2 mb-lg-0 gap-1 flex-wrap">
+            <ul className="navbar-nav mx-auto mb-2 mb-lg-0 gap-1 d-flex flex-nowrap align-items-center">
               <li className="nav-item">
                 <button
-                  className={`nav-link px-2.5 py-1.5 fw-semibold border-0 bg-transparent ${location.pathname === '/' && !location.search.includes('scroll=navbar') ? 'active' : 'text-muted'}`}
+                  className={`nav-link px-3 py-1.5 fw-semibold border-0 bg-transparent ${location.pathname === '/' ? 'active' : 'text-muted'}`}
                   onClick={() => handleNav('/')}
                 >
                   Home
@@ -230,7 +203,7 @@ const Navbar = () => {
               </li>
               <li className="nav-item">
                 <button
-                  className={`nav-link px-2.5 py-1.5 fw-semibold border-0 bg-transparent text-muted`}
+                  className={`nav-link px-3 py-1.5 fw-semibold border-0 bg-transparent ${location.pathname === '/search' || location.pathname === '/explore' ? 'active' : 'text-muted'}`}
                   onClick={() => handleNav('/explore')}
                 >
                   Explore
@@ -238,15 +211,23 @@ const Navbar = () => {
               </li>
               <li className="nav-item">
                 <Link
-                  className={`nav-link px-2.5 py-1.5 fw-semibold border-0 text-decoration-none ${location.pathname.startsWith('/trips') ? 'active text-primary' : 'text-muted'}`}
+                  className={`nav-link px-3 py-1.5 fw-semibold border-0 text-decoration-none ${location.pathname.startsWith('/trips') ? 'active text-primary' : 'text-muted'}`}
                   to="/trips"
                 >
                   Plan Trips
                 </Link>
               </li>
               <li className="nav-item">
+                <Link
+                  className={`nav-link px-3 py-1.5 fw-semibold border-0 text-decoration-none ${location.pathname === '/community' ? 'active text-primary' : 'text-muted'}`}
+                  to="/community"
+                >
+                  Community
+                </Link>
+              </li>
+              <li className="nav-item">
                 <button
-                  className={`nav-link px-2.5 py-1.5 fw-semibold border-0 bg-transparent ${location.pathname === '/about' ? 'active' : 'text-muted'}`}
+                  className={`nav-link px-3 py-1.5 fw-semibold border-0 bg-transparent ${location.pathname === '/about' ? 'active' : 'text-muted'}`}
                   onClick={() => handleNav('/about')}
                 >
                   About
@@ -254,7 +235,7 @@ const Navbar = () => {
               </li>
               <li className="nav-item">
                 <button
-                  className={`nav-link px-2.5 py-1.5 fw-semibold border-0 bg-transparent ${location.pathname === '/contact' ? 'active' : 'text-muted'}`}
+                  className={`nav-link px-3 py-1.5 fw-semibold border-0 bg-transparent ${location.pathname === '/contact' ? 'active' : 'text-muted'}`}
                   onClick={() => handleNav('/contact')}
                 >
                   Contact

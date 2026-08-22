@@ -412,6 +412,90 @@ def seed_packages():
             'cat': 'Domestic',
             'itinerary': '[{"day": 1, "title": "Guwahati to Kaziranga", "desc": "Transfer to Kaziranga National Park check-in. Evening Assamese folk dance show."}, {"day": 2, "title": "Elephant Safari & Orchid Park", "desc": "Early morning elephant safari in central range. Visit national orchid park."}, {"day": 3, "title": "Jeep Safari", "desc": "Afternoon open jeep safari in western range for rhino sighting."}, {"day": 4, "title": "Departure", "desc": "Return transfer to Guwahati."}]',
             'gallery': '[]'
+        },
+        {
+            'title': 'Maldives Luxury Overwater Resort',
+            'destination': 'Maldives',
+            'price': 49999,
+            'rating': 4.9,
+            'duration': '5 Days / 4 Nights',
+            'img': 'https://images.unsplash.com/photo-1514282401047-d79a71a590e8',
+            'desc': 'Stay in a private water villa with infinity pool, sunset dolphin cruises, and coral reef snorkeling.',
+            'cat': 'International',
+            'itinerary': '[{"day": 1, "title": "Arrive Male & Speedboat Transfer", "desc": "Speedboat transfer to luxury island resort. Welcome drinks and check-in."}, {"day": 2, "title": "Coral Reef Snorkeling", "desc": "Guided snorkeling tour among turtles and stingrays. Candlelight beach dinner."}, {"day": 3, "title": "Sunset Dolphin Cruise", "desc": "Private catamaran cruise watching wild dolphins and glowing beach plankton."}, {"day": 4, "title": "Spa & Water Sports", "desc": "Overwater spa massage session and Jet Ski adventure."}, {"day": 5, "title": "Departure", "desc": "Speedboat transfer back to Male International Airport."}]',
+            'gallery': '["https://images.unsplash.com/photo-1514282401047-d79a71a590e8", "https://images.unsplash.com/photo-1573843981267-be1999ff37cd"]'
+        },
+        {
+            'title': 'Dubai Desert & City Lights',
+            'destination': 'Dubai',
+            'price': 39999,
+            'rating': 4.8,
+            'duration': '5 Days / 4 Nights',
+            'img': 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c',
+            'desc': 'Burj Khalifa 124th floor view, desert dune bashing safari with BBQ dinner, and luxury yacht cruise.',
+            'cat': 'International',
+            'itinerary': '[{"day": 1, "title": "Arrival in Dubai", "desc": "Check-in at downtown hotel. Evening Walk at Dubai Marina & JBR Beach."}, {"day": 2, "title": "Burj Khalifa & Dubai Mall", "desc": "Visit 124th Observatory floor, Dubai Aquarium and Fountain Show."}, {"day": 3, "title": "4x4 Desert Safari", "desc": "Thrilling dune bashing, camel riding, belly dance show and BBQ dinner."}, {"day": 4, "title": "Old Dubai & Gold Souk", "desc": "Abra boat ride across Dubai Creek, Gold & Spice Souk shopping."}, {"day": 5, "title": "Departure", "desc": "Transfer to Dubai International Airport."}]',
+            'gallery': '["https://images.unsplash.com/photo-1512453979798-5ea266f8880c", "https://images.unsplash.com/photo-1580674684081-7617fbf3d745"]'
+        },
+        {
+            'title': 'Singapore Gardens & Universal Studios',
+            'destination': 'Singapore',
+            'price': 35999,
+            'rating': 4.7,
+            'duration': '4 Days / 3 Nights',
+            'img': 'https://images.unsplash.com/photo-1525625293386-3f8f99389edd',
+            'desc': 'Explore Gardens by the Bay, full day at Sentosa Island & Universal Studios, and Marina Bay Sands light show.',
+            'cat': 'International',
+            'itinerary': '[{"day": 1, "title": "Welcome to Lion City", "desc": "Arrive at Changi Airport. Transfer to hotel and Night Safari experience."}, {"day": 2, "title": "Universal Studios Sentosa", "desc": "Full day ride access at Universal Studios Singapore and Wings of Time show."}, {"day": 3, "title": "Gardens by the Bay & Marina Bay", "desc": "Cloud Forest Dome, Flower Dome, Supertree Grove and Skypark observation deck."}, {"day": 4, "title": "Jewel Changi & Departure", "desc": "Visit Rain Vortex waterfall at Jewel Changi before departure."}]',
+            'gallery': '["https://images.unsplash.com/photo-1525625293386-3f8f99389edd"]'
+        },
+        {
+            'title': 'Thailand Tropical Beaches & Phuket',
+            'destination': 'Thailand',
+            'price': 29999,
+            'rating': 4.6,
+            'duration': '6 Days / 5 Nights',
+            'img': 'https://images.unsplash.com/photo-1552465011-b4e21bf6e79a',
+            'desc': 'Speedboat tour of Phi Phi Islands, James Bond Island, Bangkok temple tours and vibrant night markets.',
+            'cat': 'International',
+            'itinerary': '[{"day": 1, "title": "Bangkok Arrival", "desc": "Transfer to hotel. Evening Chao Phraya Princess Dinner Cruise."}, {"day": 2, "title": "Bangkok Temples Tour", "desc": "Grand Palace, Wat Pho (Reclining Buddha), and Wat Arun."}, {"day": 3, "title": "Bangkok to Phuket", "desc": "Flight to Phuket. Evening Bangla Road nightlife walk."}, {"day": 4, "title": "Phi Phi Island Speedboat Tour", "desc": "Maya Bay, Monkey Beach, snorkeling and buffet lunch."}, {"day": 5, "title": "Big Buddha & Chalong Temple", "desc": "Phuket viewpoint city tour and Thai massage session."}, {"day": 6, "title": "Departure", "desc": "Transfer to Phuket Airport."}]',
+            'gallery': '[]'
+        },
+        {
+            'title': 'Swiss Alps & Glacier Express',
+            'destination': 'Switzerland',
+            'price': 89999,
+            'rating': 4.9,
+            'duration': '7 Days / 6 Nights',
+            'img': 'https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99',
+            'desc': 'Travel on the panoramic Glacier Express train, visit Mt. Titlis snow revolving cable car, and cruise Lake Geneva.',
+            'cat': 'International',
+            'itinerary': '[{"day": 1, "title": "Arrive Zurich", "desc": "Check-in. Walk along Bahnhofstrasse and Lake Zurich."}, {"day": 2, "title": "Zurich to Lucerne", "desc": "Chapel Bridge, Lion Monument, and Lake Lucerne cruise."}, {"day": 3, "title": "Mt. Titlis Snow Adventure", "desc": "Rotair revolving cable car, Ice Flyer, and Cliff Walk suspension bridge."}, {"day": 4, "title": "Interlaken & Jungfraujoch", "desc": "Train to Top of Europe (Jungfraujoch 3,454m) and Ice Palace."}, {"day": 5, "title": "Glacier Express to Zermatt", "desc": "Panoramic mountain train journey to view the iconic Matterhorn peak."}, {"day": 6, "title": "Zermatt Village Walk", "desc": "Electric car ride, Alpine hiking, and Swiss fondue dinner."}, {"day": 7, "title": "Departure", "desc": "Transfer to Zurich Airport for flight back."}]',
+            'gallery': '[]'
+        },
+        {
+            'title': 'Bali Island & Cultural Ubud',
+            'destination': 'Indonesia',
+            'price': 34999,
+            'rating': 4.8,
+            'duration': '6 Days / 5 Nights',
+            'img': 'https://images.unsplash.com/photo-1537996194471-e657df975ab4',
+            'desc': 'Private pool villa stay, Tegallalang Rice Terrace swing, Tanah Lot temple sunset, and Nusa Penida island tour.',
+            'cat': 'International',
+            'itinerary': '[{"day": 1, "title": "Arrive Denpasar Bali", "desc": "Private villa check-in in Seminyak. Relax at beach club."}, {"day": 2, "title": "Ubud Art & Rice Fields", "desc": "Visit Sacred Monkey Forest, Tegallalang Rice Terraces & Bali Swing."}, {"day": 3, "title": "Kintamani Volcano & Waterfall", "desc": "Mount Batur volcano viewpoint, Tegenungan Waterfall & Coffee Plantation."}, {"day": 4, "title": "Nusa Penida Island Tour", "desc": "Speedboat to Nusa Penida. Visit Kelingking T-Rex Beach & Angel Billabong."}, {"day": 5, "title": "Tanah Lot Temple Sunset", "desc": "Evening sunset watch at sea temple Tanah Lot and Jimbaran seafood dinner."}, {"day": 6, "title": "Departure", "desc": "Transfer to Bali International Airport."}]',
+            'gallery': '[]'
+        },
+        {
+            'title': 'Japan Cherry Blossom & Bullet Train',
+            'destination': 'Japan',
+            'price': 74999,
+            'rating': 4.9,
+            'duration': '7 Days / 6 Nights',
+            'img': 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e',
+            'desc': 'Witness cherry blossoms in Tokyo, ride the Shinkansen bullet train to Mt. Fuji, and explore ancient Kyoto temples.',
+            'cat': 'International',
+            'itinerary': '[{"day": 1, "title": "Arrive Tokyo", "desc": "Check-in at Shinjuku hotel. Evening Shibuya Crossing and Sky Deck."}, {"day": 2, "title": "Tokyo City & Sensoji Temple", "desc": "Asakusa Sensoji Temple, Nakamise Street, and TeamLab Planets digital art."}, {"day": 3, "title": "Mt. Fuji & Lake Kawaguchiko", "desc": "Day trip to Mt. Fuji 5th Station and Lake Kawaguchiko ropeway."}, {"day": 4, "title": "Bullet Train to Kyoto", "desc": "Ride Shinkansen at 300km/h. Visit Fushimi Inari Torii Gates."}, {"day": 5, "title": "Kyoto Bamboo Grove & Golden Pavilion", "desc": "Arashiyama Bamboo Forest and Kinkaku-ji Golden Temple."}, {"day": 6, "title": "Nara Deer Park & Osaka Dotonbori", "desc": "Feed friendly deer in Nara, evening food tour in Osaka Dotonbori."}, {"day": 7, "title": "Departure", "desc": "Transfer to Kansai / Narita Airport."}]',
+            'gallery': '[]'
         }
     ]
     
