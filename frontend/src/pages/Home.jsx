@@ -566,9 +566,8 @@ const Home = () => {
             }}
             style={{ textDecoration: 'none' }}
           >
-            <span style={{ fontSize: '28px', letterSpacing: '-1.5px', fontWeight: '800', color: 'var(--primary-sage)', fontFamily: "'Poppins', sans-serif" }}>plan</span>
-            <span style={{ fontSize: '18px', fontWeight: '800', backgroundColor: '#ff3838', color: '#ffffff', padding: '2px 8px', borderRadius: '6px', fontFamily: "'Poppins', sans-serif", margin: '0 6px', textTransform: 'lowercase', display: 'inline-block', lineHeight: '1.2' }}>your</span>
-            <span style={{ fontSize: '28px', letterSpacing: '-1.5px', fontWeight: '800', color: 'var(--primary-sage)', fontFamily: "'Poppins', sans-serif" }}>trip</span>
+            <span style={{ fontSize: '28px', letterSpacing: '-1.5px', fontWeight: '800', color: 'var(--primary-sage)', fontFamily: "'Poppins', sans-serif" }}>Globe</span>
+            <span style={{ fontSize: '28px', letterSpacing: '-1.5px', fontWeight: '800', color: '#ff3838', fontFamily: "'Poppins', sans-serif" }}>Trotter</span>
           </Link>
 
           <div className="d-flex align-items-center gap-2 order-lg-last">
