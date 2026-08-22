@@ -55,69 +55,13 @@ function ScrollToNavbar() {
   return null;
 }
 
-function GlobalThemeToggle() {
-  const [theme, setTheme] = React.useState(() => localStorage.getItem('theme') || 'light');
-  const [showToast, setShowToast] = React.useState(false);
-
-  React.useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-    document.body.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
-  }, [theme]);
-
-  const toggleTheme = () => {
-    const nextTheme = theme === 'light' ? 'dark' : 'light';
-    setTheme(nextTheme);
-    document.documentElement.setAttribute('data-theme', nextTheme);
-    document.body.setAttribute('data-theme', nextTheme);
-    localStorage.setItem('theme', nextTheme);
-    setShowToast(true);
-    setTimeout(() => setShowToast(false), 2500);
-  };
-
-  return (
-    <>
-      {showToast && (
-        <div
-          className="position-fixed px-3.5 py-2 rounded-pill shadow-lg border text-white fw-bold d-flex align-items-center gap-2 animate-fade-in"
-          style={{
-            bottom: '84px',
-            right: '24px',
-            zIndex: 99999,
-            backgroundColor: theme === 'dark' ? '#0f172a' : '#1f352b',
-            borderColor: theme === 'dark' ? '#38bdf8' : '#c5a880',
-            fontSize: '13px'
-          }}
-        >
-          <span>{theme === 'dark' ? '🌙 Dark Mode Activated' : '☀️ Light Mode Activated'}</span>
-        </div>
-      )}
-      <button
-        onClick={toggleTheme}
-        className="btn rounded-circle shadow-lg d-flex align-items-center justify-content-center p-0"
-        title={theme === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'}
-        style={{
-          position: 'fixed',
-          bottom: '24px',
-          right: '24px',
-          width: '50px',
-          height: '50px',
-          zIndex: 99999,
-          backgroundColor: theme === 'light' ? '#1f352b' : '#38bdf8',
-          color: theme === 'light' ? '#ffffff' : '#0f172a',
-          border: '2px solid rgba(255,255,255,0.3)',
-          fontSize: '20px',
-          cursor: 'pointer',
-          transition: 'all 0.3s ease'
-        }}
-      >
-        {theme === 'light' ? <FaMoon /> : <FaSun />}
-      </button>
-    </>
-  );
-}
-
 function App() {
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    document.body.setAttribute('data-theme', savedTheme);
+  }, []);
+
   return (
     <Router>
       <ScrollToNavbar />
@@ -150,7 +94,6 @@ function App() {
           </Routes>
         </main>
         <Footer />
-        <GlobalThemeToggle />
       </div>
     </Router>
   );
