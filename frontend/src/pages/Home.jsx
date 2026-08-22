@@ -724,6 +724,22 @@ const Home = () => {
                 </button>
               </li>
               <li className="nav-item">
+                <Link
+                  className="nav-link px-3 py-1.5 fw-semibold border-0 text-decoration-none text-muted"
+                  to="/trips"
+                >
+                  Plan Trips
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                  className="nav-link px-3 py-1.5 fw-semibold border-0 text-decoration-none text-muted"
+                  to="/community"
+                >
+                  Community
+                </Link>
+              </li>
+              <li className="nav-item">
                 <button
                   className="nav-link px-3 py-1.5 fw-semibold border-0 bg-transparent text-muted"
                   onClick={() => {
